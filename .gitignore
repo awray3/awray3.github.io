@@ -1,5 +1,3 @@
-_site
-_freeze
-.quarto
+/_site/
 .DS_Store
 /.quarto/
