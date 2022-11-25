@@ -14,7 +14,7 @@ about:
 
 I'm Andrew Wray, and I am a data scientist and mathematician based in Seattle, WA. I completed my PhD
 in Algebraic Geometry at the University of Oregon in June 2020 under the guidance of [Nick Addington](nick_webpage), and now I work
-as a data scientist for [Fullpower Technologies]
+as a data scientist for [Fullpower Technologies][fullpower]
 developing and enhancing AI-based algorithms for
 [Sleeptracker][sleeptracker]
 In my spare time I enjoy reading science fiction, playing the drums and guitar,

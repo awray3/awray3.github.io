@@ -1,10 +1,11 @@
 ---
 title: How to Alter Git Histories
 date: '2022-11-12'
+modified: '2022-11-25'
 categories:
   - git
   - TIL
-description: Remove files from your git history with git-filter-repo
+description: Remove files from your git history with `git-filter-repo`
 ---
 
 I recently cleaned a couple of git repos that had large data files committed early in their history, and in the process I learned about [git-filter-repo][filter_repo_github], a tool for cleanly altering git histories.
@@ -42,16 +43,7 @@ rm -rf /tmp/new-repo
 ```
 
 ```{bash}
-#| include: false
 #| vscode: {languageId: shellscript}
-mkdir /tmp/new-repo && cd /tmp/new-repo
-git init
-touch file_1.txt file_2.txt
-git add .
-git commit -m "Initial commit"
-```
-
-```bash
 mkdir /tmp/new-repo && cd /tmp/new-repo
 git init
 touch file_1.txt file_2.txt

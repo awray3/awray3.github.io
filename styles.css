@@ -6,26 +6,20 @@ code {
 
 div.sourceCode {
     background-color: transparent;
+    margin-bottom: initial;
 }
 pre.sourceCode {
     background-color: transparent;
 }
 
 div.cell {
-    background-color: rgb(242, 242, 242);
+    /* background-color: rgb(242, 242, 242); */
+    /* background-color: rgb(88, 88, 88); */
     border-bottom: 20px;
     margin-bottom: 20px;
 }
 
 div.cell-output.cell-output-stdout pre:nth-child(1) {
     margin-bottom: -5px;
+    opacity: 50%;
 }
-
-/* 
-a {
-    color: #3b8bba;
-}
-
-a:visited {
-    color: #442678
-} */

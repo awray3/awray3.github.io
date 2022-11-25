@@ -13,12 +13,10 @@ website:
         href: https://github.com/awray3
 format:
   html:
-    # theme: cosmo
-    # theme: cyborg
-    theme: cerulean
+    theme: slate
+    highlight-style: dracula
     linkcolor: "#3b8bba"
     monofont: CaskaydiaCove Nerd Font
-    # theme: darkly
     css: styles.css
 
 
