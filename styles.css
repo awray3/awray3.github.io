@@ -1,0 +1,31 @@
+/* css styles */
+
+code {
+    color: #3498db;
+}
+
+div.sourceCode {
+    background-color: transparent;
+}
+pre.sourceCode {
+    background-color: transparent;
+}
+
+div.cell {
+    background-color: rgb(242, 242, 242);
+    border-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+div.cell-output.cell-output-stdout pre:nth-child(1) {
+    margin-bottom: -5px;
+}
+
+/* 
+a {
+    color: #3b8bba;
+}
+
+a:visited {
+    color: #442678
+} */

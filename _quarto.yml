@@ -1,0 +1,25 @@
+project:
+  type: website
+
+website:
+  title: "Andrew Wray"
+  navbar:
+    right:
+      - text: Blog
+        href: blog.qmd
+      - text: Research
+        href: research.qmd
+      - icon: github
+        href: https://github.com/awray3
+format:
+  html:
+    # theme: cosmo
+    # theme: cyborg
+    theme: cerulean
+    linkcolor: "#3b8bba"
+    monofont: CaskaydiaCove Nerd Font
+    # theme: darkly
+    css: styles.css
+
+
+

@@ -1,0 +1,21 @@
+---
+title: "Series: TIL"
+listing: 
+  contents: .
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: false
+  fields: [date, title, reading-time, description]
+description: Small, helpful bits of coding
+---
+
+## Today I Learned
+
+On an episode of [Python Bytes][python-bytes], a [blog post][willison-blog] by Simon Willison was featured, encouraging people to write short blog posts on any topic or tool you've recently learned about. This series was inspired by that post.
+
+
+[python-bytes]: https://pythonbytes.fm/episodes/show/309/when-malware-pocs-are-themselves-malware
+[willison-blog]: https://simonwillison.net/2022/Nov/6/what-to-blog-about/?utm_source=pocket_saves
+
