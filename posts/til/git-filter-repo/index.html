@@ -126,6 +126,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <link rel="stylesheet" href="../../../styles.css">
+<meta property="og:title" content="Andrew Wray - How to Alter Git Histories">
+<meta property="og:description" content="Remove files from your git history with `git-filter-repo`">
+<meta property="og:site-name" content="Andrew Wray's Blog">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -228,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>Initialized empty Git repository in /private/tmp/new-repo/.git/</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[main (root-commit) 0e9ecef] Initial commit</code></pre>
+<pre><code>[main (root-commit) 15e1368] Initial commit</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code> 2 files changed, 0 insertions(+), 0 deletions(-)</code></pre>
@@ -243,7 +246,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-vscode="{&quot;languageId&quot;:&quot;shellscript&quot;}" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--name-status</span> <span class="at">--oneline</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0e9ecef (HEAD -&gt; main) Initial commit</code></pre>
+<pre><code>15e1368 (HEAD -&gt; main) Initial commit</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>A   file_1.txt</code></pre>
@@ -288,13 +291,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>Parsed 1 commits</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>New history written in 0.02 seconds; now repacking/cleaning...</code></pre>
+<pre><code>New history written in 0.03 seconds; now repacking/cleaning...</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Repacking your repo and cleaning out old unneeded objects</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>HEAD is now at 9f3e194 Initial commit</code></pre>
+<pre><code>HEAD is now at a804524 Initial commit</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Enumerating objects: 3, done.</code></pre>
@@ -324,7 +327,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-vscode="{&quot;languageId&quot;:&quot;shellscript&quot;}" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--name-status</span> <span class="at">--oneline</span>                         </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>9f3e194 (HEAD -&gt; main) Initial commit</code></pre>
+<pre><code>a804524 (HEAD -&gt; main) Initial commit</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>A   file_1.txt</code></pre>
@@ -476,6 +479,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://utteranc.es/client.js" repo="awray3/blog-comments" issue-term="pathname" theme="photon-dark" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 
