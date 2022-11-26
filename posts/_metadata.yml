@@ -8,4 +8,8 @@ freeze: true
 title-block-banner: false
 
 page-layout: article
-# page-layout: full
+
+comments:
+  utterances: 
+      repo: awray3/blog-comments
+      theme: photon-dark

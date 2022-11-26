@@ -3,6 +3,8 @@ project:
 
 website:
   title: "Andrew Wray"
+  open-graph: 
+    site-name: "Andrew Wray's Blog"
   navbar:
     right:
       - text: Blog
