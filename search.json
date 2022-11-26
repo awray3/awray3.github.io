@@ -1,0 +1,72 @@
+[
+  {
+    "objectID": "research.html",
+    "href": "research.html",
+    "title": "Research",
+    "section": "",
+    "text": "Moduli Spaces of Twisted Hermite-Einstein Connections on K3 Surfaces. My PhD thesis under the supervision of Nick Addington.\nTwisted Fourier-Mukai partners of Enriques surfaces. With Nick Addington. Appears in Math. Z. 297, 2021. (Arxiv Link)"
+  },
+  {
+    "objectID": "research.html#in-physics",
+    "href": "research.html#in-physics",
+    "title": "Research",
+    "section": "In Physics",
+    "text": "In Physics\n\nHyperspherical approach to a three-boson problem in two dimensions with a magnetic field. With Seth Rittenhouse and B.L. Johnson. Appears in Phys. Rev. A 93, 2016."
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "Welcome to my blog! I’m new to writing blog posts, and I’m glad you’re here to enjoy it with me. This is a place for me to write down my thoughts on topics that interest me, including mathematics, physics, data science, machine learning, music, or whatever topic piques my interest."
+  },
+  {
+    "objectID": "posts/til/git-filter-repo/index.html",
+    "href": "posts/til/git-filter-repo/index.html",
+    "title": "How to Alter Git Histories",
+    "section": "",
+    "text": "I recently cleaned a couple of git repos that had large data files committed early in their history, and in the process I learned about git-filter-repo, a tool for cleanly altering git histories.\nThere are many reasons you might need to modify your git history. For example, consider a local repo you want to push to Github that at some point in time had a file larger than their 100MB cap committed. In order to push to Github, you would need to not only remove the file from your repo with git rm, but also remove the file from any commit it showed up in. Another common scenario: you want to purge your git history of any accidentally tracked junk files, such as __pycache__ folders or .DS_Store files.\nIn both scenarios, the goal becomes to completely rid a file (or directory) from the git history."
+  },
+  {
+    "objectID": "posts/til/git-filter-repo/index.html#the-old-way-git-filter-branch",
+    "href": "posts/til/git-filter-repo/index.html#the-old-way-git-filter-branch",
+    "title": "How to Alter Git Histories",
+    "section": "The old way: git filter-branch",
+    "text": "The old way: git filter-branch\nWhen you search around for ideas on how to rid files from histories you might find a lot of older stack-exchange posts and tutorial websites with solutions involving git filter-branch. However, according to the git filter-repo readme, filter-branch has numerous problems: it is slow, potentially unsafe for your repository, and clunky to use. For that reason I won’t describe how to use it here."
+  },
+  {
+    "objectID": "posts/til/git-filter-repo/index.html#enter-git-filter-repo",
+    "href": "posts/til/git-filter-repo/index.html#enter-git-filter-repo",
+    "title": "How to Alter Git Histories",
+    "section": "Enter git filter-repo",
+    "text": "Enter git filter-repo\nPeople have since built simpler, more effective tools for performing git history manipulations, and the best one I’ve found is git-filter-repo. I picked it after having been convinced by their comparisons to other tools in this area. They cover many use cases in their handbook, which is worth at least glancing over."
+  },
+  {
+    "objectID": "posts/til/git-filter-repo/index.html#example-removing-files-from-the-git-history",
+    "href": "posts/til/git-filter-repo/index.html#example-removing-files-from-the-git-history",
+    "title": "How to Alter Git Histories",
+    "section": "Example: Removing files from the git history",
+    "text": "Example: Removing files from the git history\nIn this post I’ll focus on the example of removing a file from the git history. However, this works the same with directories and similarly with glob patterns or regex; see --path-glob and --path-regex.\nFor illustration, I’ll initialize an empty git repository and add two files, file_1.txt and file_2.txt, in a single commit.\n\nmkdir /tmp/new-repo && cd /tmp/new-repo\ngit init\ntouch file_1.txt file_2.txt\ngit add .\ngit commit -m \"Initial commit\"\n\nInitialized empty Git repository in /private/tmp/new-repo/.git/\n\n\n[main (root-commit) 0e9ecef] Initial commit\n\n\n 2 files changed, 0 insertions(+), 0 deletions(-)\n\n\n create mode 100644 file_1.txt\n\n\n create mode 100644 file_2.txt\n\n\n\ngit log --name-status --oneline\n\n0e9ecef (HEAD -> main) Initial commit\n\n\nA   file_1.txt\n\n\nA   file_2.txt\n\n\nFor this example our plan will be to delete file_2.txt from the git history without deleting file_2.txt itself.\n\nStep 1: Decaching\n“Decaching” is a word I made up for this step of “remove the file from the current git commit but keep it around in the folder.” You can do this with\n\ngit rm --cached file_2.txt\n\nrm 'file_2.txt'\n\n\nVerify by checking that ls still shows both files, and that git status shows that file_2.txt is no longer tracked.\n\nls\n\nfile_1.txt  file_2.txt\n\n\n\ngit status --short\n\nD  file_2.txt\n\n\n?? file_2.txt\n\n\n\n\nStep 2: filter-repo\nWith file_2.txt unstaged, apply filter-repo like this to delete file_2.txt from the history:\n\ngit filter-repo --path file_2.txt --invert-paths --force\n\nParsed 1 commits\n\n\nNew history written in 0.02 seconds; now repacking/cleaning...\n\n\nRepacking your repo and cleaning out old unneeded objects\n\n\nHEAD is now at 9f3e194 Initial commit\n\n\nEnumerating objects: 3, done.\n\n\nCounting objects:  33% (1/3)Counting objects:  66% (2/3)Counting objects: 100% (3/3)Counting objects: 100% (3/3), done.\n\n\nWriting objects:  33% (1/3)Writing objects:  66% (2/3)Writing objects: 100% (3/3)Writing objects: 100% (3/3), done.\n\n\nTotal 3 (delta 0), reused 0 (delta 0), pack-reused 0\n\n\nCompletely finished after 0.08 seconds.\n\n\nThe --path specifies the path you’re trying to target for removal, and the --invert-paths is basically the logical negation of the filtering condition, so when it’s applied it will only delete file_2.txt. When you leave that flag off, you instead delete everything except file_2.txt. You get only the file, or everything but the file.\nThe --force flag is needed because filter-repo expects us to follow best practices by only using it on a fresh clone. In practice1, you would commit all your work, get a clean git state, and make a fresh clone of your repo to operate on with filter-repo.\nNow check the files in the git log and filesystem:\n\nls\n\nfile_1.txt  file_2.txt\n\n\n\ngit log --name-status --oneline                         \n\n9f3e194 (HEAD -> main) Initial commit\n\n\nA   file_1.txt\n\n\nThe single commit now does not have any information pertaining to file_2.txt, and file_2.txt is still around on the filesystem. (If you just wanted to delete it completely, you could just skip the detaching step altogether.)\nThat’s all there is to it!"
+  },
+  {
+    "objectID": "posts/til/til.html",
+    "href": "posts/til/til.html",
+    "title": "Series: TIL",
+    "section": "",
+    "text": "On an episode of Python Bytes, a blog post by Simon Willison was featured, encouraging people to write short blog posts on any topic or tool you’ve recently learned about. This series was inspired by that post."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "About",
+    "section": "",
+    "text": "I’m Andrew Wray, and I am a data scientist and mathematician based in Seattle, WA. I completed my PhD in Algebraic Geometry at the University of Oregon in June 2020 under the guidance of Nick Addington, and now I work as a data scientist for Fullpower Technologies developing and enhancing AI-based algorithms for Sleeptracker In my spare time I enjoy reading science fiction, playing the drums and guitar, and hanging out with my cat.\nIf you wish to get in contact with me, feel free to send me an email or reach out on LinkedIn."
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "My Blog",
+    "section": "",
+    "text": "Series: TIL\n\n\n\n\n\nSmall, helpful bits of coding\n\n\n\n\n \n\n\n\n\n\n\nHow to Alter Git Histories\n\n\n\n\n\n\n\ngit\n\n\nTIL\n\n\n\n\nRemove files from your git history with git-filter-repo\n\n\n\n\n\n\nNov 12, 2022\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\nWelcome! I’m glad you’re here.\n\n\n\n\n\n\nNov 14, 2021\n\n\n\n\n\n\nNo matching items"
+  }
+]
