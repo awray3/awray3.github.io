@@ -51,9 +51,9 @@
   {
     "objectID": "posts/til/til.html",
     "href": "posts/til/til.html",
-    "title": "Series: TIL",
+    "title": "Series: Today I Learned",
     "section": "",
-    "text": "On an episode of Python Bytes, a blog post by Simon Willison was featured, encouraging people to write short blog posts on any topic or tool you’ve recently learned about. This series was inspired by that post."
+    "text": "Python Bytes recently mentioned a blog post by Simon Willison encouraging people to write more Today I Learned (TIL) blog posts. These are meant to be short explanations or demonstrations of things you learn.\n\n\n\n\n\n\n\n\n\n\nHow to Alter Git Histories\n\n\n\n\n\nRemove files from your git history with git-filter-repo\n\n\n\n\n\n\nNov 12, 2022\n\n\n3 min\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -67,6 +67,6 @@
     "href": "blog.html",
     "title": "My Blog",
     "section": "",
-    "text": "Series: TIL\n\n\n\n\n\nSmall, helpful bits of coding\n\n\n\n\n \n\n\n\n\n\n\nHow to Alter Git Histories\n\n\n\n\n\n\n\ngit\n\n\nTIL\n\n\n\n\nRemove files from your git history with git-filter-repo\n\n\n\n\n\n\nNov 12, 2022\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\nWelcome! I’m glad you’re here.\n\n\n\n\n\n\nNov 14, 2021\n\n\n\n\n\n\nNo matching items"
+    "text": "Series: Today I Learned\n\n\n\n\n\nSmall, helpful bits of whatever\n\n\n\n\n \n\n\n\n\n\n\nHow to Alter Git Histories\n\n\n\n\n\n\n\ngit\n\n\nTIL\n\n\n\n\nRemove files from your git history with git-filter-repo\n\n\n\n\n\n\nNov 12, 2022\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\nWelcome! I’m glad you’re here.\n\n\n\n\n\n\nNov 14, 2021\n\n\n\n\n\n\nNo matching items"
   }
 ]
