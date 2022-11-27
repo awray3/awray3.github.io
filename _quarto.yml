@@ -3,6 +3,9 @@ project:
 
 website:
   title: "Andrew Wray"
+  site-url: https://awray3.github.io
+  favicon: static/img/favicon.ico
+  description: Personal website and blog of Andrew Wray
   open-graph: 
     site-name: "Andrew Wray's Blog"
   navbar:
@@ -13,13 +16,25 @@ website:
         href: research.qmd
       - icon: github
         href: https://github.com/awray3
+      - icon: mastodon
+        href: https://fosstodon.org/@awray
+      - icon: rss
+        href: blog.xml
 format:
   html:
-    theme: slate
-    highlight-style: dracula
-    linkcolor: "#3b8bba"
+    theme: 
+      - slate
+      - static/css/dark.scss
     monofont: CaskaydiaCove Nerd Font
-    css: styles.css
-
-
-
+    toc: true
+    toc-location: right
+    smooth-scroll: true
+    email-obfuscation: javascript
+    fig-cap-location: margin
+    tbl-cap-location: margin
+    # comments:
+    #   utterances: 
+    #     repo: awray3/blog-comments
+    #     theme: preferred-color-scheme
+    title-block-banner: false
+    highlight-style: atom-one-dark
