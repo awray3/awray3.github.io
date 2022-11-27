@@ -8,8 +8,7 @@ categories:
 I just finished migrating my blog from [Hugo][gohugo] to [Quarto][quarto].  Hugo
 is an amazing static site generator, great for anyone looking to make a
 beautiful website or blog.  However, I found that Quarto supports computational
-material, like Jupyter notebooks, much more efficiently.  Since my blog is small
-and easy to migrate, I gave it a try and haven't looked back.
+material, like Jupyter notebooks, much more efficiently. 
 
 ## Intro to Quarto
 
@@ -24,6 +23,8 @@ They also created R Markdown, a fantastic markup language for R projects.
 Quarto Markdown `.qmd`, their new generalization of R Markdown,
 is the core filetype along with Jupyter `ipynb` notebooks.
 It's kind of like a hybrid of the two.
+Posit has been making high-quality editors and writing tools for quite some time,
+and they have continued this trend with Quarto.
 
 ## Why I chose Quarto over Hugo
 
@@ -33,18 +34,22 @@ that meshed with my brain for dealing with computational content in Hugo, like
 Jupyter notebooks or python scripts.  The [solution][quarto-hugo] I found on
 Quarto's website to including computational content in Hugo involves writing
 Quarto `.qmd` files and rendering them into Hugo `.md` files before running
-Hugo.  So, I thought, why not just make the whole websote in Quarto?
+Hugo. This process works if you have a well-established Hugo blog,
+but since mine is relatively new, I decided to migrate wholesale to Quarto and 
+have been happy with the move.
 
 Quarto's strength is in its handling of computational content. For example, my
-recent [blog post on git-filter-repo](../til/git-filter-repo/index.qmd) was written
-in a single `.qmd` file tied to a `bash` Jupyter kernel, and configuring it with Quarto 
-was relatively painless.
+recent [blog post on git-filter-repo](../til/git-filter-repo/index.qmd) was
+written in a single `.qmd` file tied to a `bash` Jupyter kernel, and configuring
+it with Quarto was relatively painless.  This style of computational writing
+seems to fit my brain a lot better, too.
 
+Some other noteworthy features I'll mention quickly:
 Quarto also [freezes][freezing] computational content, taking snapshots of
-computations that get checked into version control[^jb-cache].
-This speeds up the rendering process,
-and it ensures that you don't have trouble building your website in
-[5 years time](https://www.youtube.com/watch?v=T8YCSJpF4g4) when dependencies grow stale! 
+computations that get checked into version control[^jb-cache].  This speeds up
+the rendering process, and it ensures that you don't have trouble building your
+website in [5 years time](https://www.youtube.com/watch?v=T8YCSJpF4g4) when
+dependencies grow stale!
 Quarto has great editor support too, which is a nice bonus.
 
 ## Quarto Resources

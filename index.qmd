@@ -24,6 +24,10 @@ and hanging out with my [cat][cat].
 If you wish to get in contact with me, feel free to send me an [email][contact] 
 or reach out on <a rel="me" href="https://fosstodon.org/@awray">Mastodon</a>!
 
+--- 
+
+<small>Views and opinions expressed in this blog are purely my own and do not necessarily reflect the views of my employer.</small>
+
 [nick_webpage]: https://pages.uoregon.edu/adding/
 [fullpower]: https://www.fullpower.com/
 [sleeptracker]: https://www.sleeptracker.com/.

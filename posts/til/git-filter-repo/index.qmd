@@ -137,7 +137,7 @@ git log --name-status --oneline
 
 The single commit now does not have any information pertaining to `file_2.txt`,
 and `file_2.txt` is still around on the filesystem.  (If you just wanted to
-delete it completely, you could just skip the detaching step altogether.)
+delete it completely, you could just skip the decaching step altogether.)
 
 That's all there is to it!
 
