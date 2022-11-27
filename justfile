@@ -3,6 +3,6 @@ publish:
 
 start-pr title:
     git checkout drafts
-    git push -d origin drafts
+    if [[ -n "git ls-remote --heads git@github.com:awray3/awray3.github.io drafts" ]]; then git push -d origin drafts; fi
     git push origin drafts
-    gh pr create --web
+    gh pr create --title "{{title}}" --web

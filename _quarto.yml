@@ -25,7 +25,7 @@ format:
     theme: 
       - slate
       - static/css/dark.scss
-    monofont: CaskaydiaCove Nerd Font
+    monofont: CaskaydiaCove Nerd Font, Monaco
     toc: true
     toc-location: right
     smooth-scroll: true
