@@ -1,15 +1,10 @@
 [
   {
-    "listing": "/posts/til/til.html",
-    "items": [
-      "/posts/til/git-filter-repo/index.html"
-    ]
-  },
-  {
     "listing": "/blog.html",
     "items": [
-      "/posts/til/til.html",
+      "/posts/migrating-to-quarto/index.html",
       "/posts/til/git-filter-repo/index.html",
+      "/posts/til/til.html",
       "/posts/welcome/index.html"
     ]
   }

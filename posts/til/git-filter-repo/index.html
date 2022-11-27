@@ -95,6 +95,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
+<link href="../../../static/img/favicon.ico" rel="icon">
 <script src="../../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -123,15 +124,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Submit"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 
 
-<link rel="stylesheet" href="../../../styles.css">
 <meta property="og:title" content="Andrew Wray - How to Alter Git Histories">
 <meta property="og:description" content="Remove files from your git history with `git-filter-repo`">
 <meta property="og:site-name" content="Andrew Wray's Blog">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -160,6 +161,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </i> 
  <span class="menu-text"></span></a>
   </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://fosstodon.org/@awray"><i class="bi bi-mastodon" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../blog.xml"><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
 </ul>
               <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
@@ -170,7 +181,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-old-way-git-filter-branch" id="toc-the-old-way-git-filter-branch" class="nav-link active" data-scroll-target="#the-old-way-git-filter-branch">The old way: <code>git filter-branch</code></a></li>
+  <li><a href="#enter-git-filter-repo" id="toc-enter-git-filter-repo" class="nav-link" data-scroll-target="#enter-git-filter-repo">Enter <code>git filter-repo</code></a></li>
+  <li><a href="#example-removing-files-from-the-git-history" id="toc-example-removing-files-from-the-git-history" class="nav-link" data-scroll-target="#example-removing-files-from-the-git-history">Example: removing files from the git history</a>
+  <ul class="collapse">
+  <li><a href="#step-1-decaching" id="toc-step-1-decaching" class="nav-link" data-scroll-target="#step-1-decaching">Step 1: Decaching</a></li>
+  <li><a href="#step-2-filter-repo" id="toc-step-2-filter-repo" class="nav-link" data-scroll-target="#step-2-filter-repo">Step 2: <code>filter-repo</code></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -200,6 +225,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">November 25, 2022</p>
+    </div>
+  </div>
     
   </div>
   
@@ -218,7 +249,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>People have since built simpler, more effective tools for performing git history manipulations, and the best one I’ve found is <a href="https://github.com/newren/git-filter-repo">git-filter-repo</a>. I picked it after having been convinced by their <a href="https://github.com/newren/git-filter-repo#why-filter-repo-instead-of-other-alternatives">comparisons to other tools</a> in this area. They cover many use cases in their <a href="https://htmlpreview.github.io/?https://github.com/newren/git-filter-repo/blob/docs/html/git-filter-repo.html">handbook</a>, which is worth at least glancing over.</p>
 </section>
 <section id="example-removing-files-from-the-git-history" class="level2">
-<h2 class="anchored" data-anchor-id="example-removing-files-from-the-git-history">Example: Removing files from the git history</h2>
+<h2 class="anchored" data-anchor-id="example-removing-files-from-the-git-history">Example: removing files from the git history</h2>
 <p>In this post I’ll focus on the example of removing a file from the git history. However, this works the same with directories and similarly with glob patterns or regex; see <code>--path-glob</code> and <code>--path-regex</code>.</p>
 <p>For illustration, I’ll initialize an empty git repository and add two files, <code>file_1.txt</code> and <code>file_2.txt</code>, in a single commit.</p>
 <div class="cell" data-vscode="{&quot;languageId&quot;:&quot;shellscript&quot;}" data-execution_count="2">
@@ -231,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>Initialized empty Git repository in /private/tmp/new-repo/.git/</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[main (root-commit) 15e1368] Initial commit</code></pre>
+<pre><code>[main (root-commit) a51c6ec] Initial commit</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code> 2 files changed, 0 insertions(+), 0 deletions(-)</code></pre>
@@ -246,7 +277,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-vscode="{&quot;languageId&quot;:&quot;shellscript&quot;}" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--name-status</span> <span class="at">--oneline</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>15e1368 (HEAD -&gt; main) Initial commit</code></pre>
+<pre><code>a51c6ec (HEAD -&gt; main) Initial commit</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>A   file_1.txt</code></pre>
@@ -291,13 +322,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>Parsed 1 commits</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>New history written in 0.03 seconds; now repacking/cleaning...</code></pre>
+<pre><code>New history written in 0.02 seconds; now repacking/cleaning...</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Repacking your repo and cleaning out old unneeded objects</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>HEAD is now at a804524 Initial commit</code></pre>
+<pre><code>HEAD is now at 2361846 Initial commit</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Enumerating objects: 3, done.</code></pre>
@@ -312,7 +343,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>Total 3 (delta 0), reused 0 (delta 0), pack-reused 0</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Completely finished after 0.08 seconds.</code></pre>
+<pre><code>Completely finished after 0.07 seconds.</code></pre>
 </div>
 </div>
 <p>The <code>--path</code> specifies the path you’re trying to target for removal, and the <code>--invert-paths</code> is basically the logical negation of the filtering condition, so when it’s applied it will <em>only delete</em> <code>file_2.txt</code>. When you leave that flag off, you instead <em>delete everything except</em> <code>file_2.txt</code>. You get only the file, or everything but the file.</p>
@@ -327,13 +358,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-vscode="{&quot;languageId&quot;:&quot;shellscript&quot;}" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--name-status</span> <span class="at">--oneline</span>                         </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>a804524 (HEAD -&gt; main) Initial commit</code></pre>
+<pre><code>2361846 (HEAD -&gt; main) Initial commit</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>A   file_1.txt</code></pre>
 </div>
 </div>
-<p>The single commit now does not have any information pertaining to <code>file_2.txt</code>, and <code>file_2.txt</code> is still around on the filesystem. (If you just wanted to delete it completely, you could just skip the detaching step altogether.)</p>
+<p>The single commit now does not have any information pertaining to <code>file_2.txt</code>, and <code>file_2.txt</code> is still around on the filesystem. (If you just wanted to delete it completely, you could just skip the decaching step altogether.)</p>
 <p>That’s all there is to it!</p>
 
 
@@ -480,10 +511,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<script src="https://utteranc.es/client.js" repo="awray3/blog-comments" issue-term="pathname" theme="photon-dark" crossorigin="anonymous" async="">
-</script>
 </div> <!-- /content -->
 
 
 
+<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
