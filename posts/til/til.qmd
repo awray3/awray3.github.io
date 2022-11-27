@@ -1,17 +1,12 @@
 ---
-title: "Series: Today I Learned"
-listing: 
-  contents: .
-  sort: "date desc"
-  type: default
-  categories: true
-  sort-ui: false
-  filter-ui: false
-  fields: [date, title, reading-time, description]
+title: "TIL: Today I Learned"
 description: Small, helpful bits of whatever
+date: 2022-11-11
+date-modified: 2022-11-27
 ---
 
-[Python Bytes][python-bytes] recently mentioned a [blog post][willison-blog] by Simon Willison encouraging people to write more Today I Learned (TIL) blog posts. These are meant to be short explanations or demonstrations of things you learn. 
+[Python Bytes][python-bytes] recently mentioned a [blog post][willison-blog] by Simon Willison encouraging people to write more Today I Learned (TIL) blog posts. These are meant to be short explanations or demonstrations of things you learn.
+I will be adding more of these in the coming days!
 
 [python-bytes]: https://pythonbytes.fm/episodes/show/309/when-malware-pocs-are-themselves-malware
 [willison-blog]: https://simonwillison.net/2022/Nov/6/what-to-blog-about/?utm_source=pocket_saves

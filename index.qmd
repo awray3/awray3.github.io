@@ -10,17 +10,23 @@ about:
       href: https://github.com/awray3
     - icon: envelope
       href: mailto:andrew.wray2718@gmail.com
+    - icon: mastodon
+      href: https://fosstodon.org/@awray
 ---
 
-I'm Andrew Wray, and I am a data scientist and mathematician based in Seattle, WA. I completed my PhD
-in Algebraic Geometry at the University of Oregon in June 2020 under the guidance of [Nick Addington](nick_webpage), and now I work
-as a data scientist for [Fullpower Technologies][fullpower]
-developing and enhancing AI-based algorithms for
-[Sleeptracker][sleeptracker]
+I'm Andrew Wray, and I am a data scientist and mathematician based in Seattle, WA. 
+
+I received my Bachelor's of Science in Math and Physics at Western Washington University in 2014, where I was recognized as WWU Math Department's Outstanding Graduate. I completed my PhD in Algebraic Geometry at the University of Oregon in June 2020 under the guidance of [Nick Addington](nick_webpage). These days I work as a data scientist for [Fullpower Technologies][fullpower]
+developing and enhancing AI-based algorithms for [Sleeptracker][sleeptracker].
 In my spare time I enjoy reading science fiction, playing the drums and guitar,
 and hanging out with my [cat][cat].
 
-If you wish to get in contact with me, feel free to send me an [email][contact] or reach out on LinkedIn.
+If you wish to get in contact with me, feel free to send me an [email][contact] 
+or reach out on <a rel="me" href="https://fosstodon.org/@awray">Mastodon</a>!
+
+--- 
+
+<small>Views and opinions expressed in this blog are purely my own and do not necessarily reflect the views of my employer.</small>
 
 [nick_webpage]: https://pages.uoregon.edu/adding/
 [fullpower]: https://www.fullpower.com/

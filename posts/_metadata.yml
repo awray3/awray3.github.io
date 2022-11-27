@@ -4,12 +4,4 @@
 # (see https://quarto.org/docs/projects/code-execution.html#freeze)
 freeze: true
 
-# Enable banner style title blocks
-title-block-banner: false
-
 page-layout: article
-
-comments:
-  utterances: 
-      repo: awray3/blog-comments
-      theme: photon-dark

@@ -1,0 +1,76 @@
+---
+title: Migrating my blog from Hugo to Quarto
+date: '2022-11-25'
+categories:
+    - Quarto
+---
+
+I just finished migrating my blog from [Hugo][gohugo] to [Quarto][quarto].  Hugo
+is an amazing static site generator, great for anyone looking to make a
+beautiful website or blog.  However, I found that Quarto supports computational
+material, like Jupyter notebooks, much more efficiently. 
+
+## Intro to Quarto
+
+Quarto is a tool for compiling and publishing markdown and Jupyter notebooks
+into HTML, PDF, or other formats, similar to Hugo and [Jupyter
+Book][jupyter-book].  It is based on the Quarto Markdown `.qmd` filetype, which
+is pretty similar to the [MyST markdown][myst] filetype (the Jupyter Book equivalent).
+
+Quarto is maintained by [Posit][posit], the company that [originally
+began][posit-rstudio] as RStudio (which it still maintains).
+They also created R Markdown, a fantastic markup language for R projects.
+Quarto Markdown `.qmd`, their new generalization of R Markdown,
+is the core filetype along with Jupyter `ipynb` notebooks.
+It's kind of like a hybrid of the two.
+Posit has been making high-quality editors and writing tools for quite some time,
+and they have continued this trend with Quarto.
+
+## Why I chose Quarto over Hugo
+
+As I mentioned, Hugo is an excellent tool for generating static sites, and I had
+just started a blog using Hugo a few weeks ago.  However, I couldn't find a way
+that meshed with my brain for dealing with computational content in Hugo, like
+Jupyter notebooks or python scripts.  The [solution][quarto-hugo] I found on
+Quarto's website to including computational content in Hugo involves writing
+Quarto `.qmd` files and rendering them into Hugo `.md` files before running
+Hugo. This process works if you have a well-established Hugo blog,
+but since mine is relatively new, I decided to migrate wholesale to Quarto and 
+have been happy with the move.
+
+Quarto's strength is in its handling of computational content. For example, my
+recent [blog post on git-filter-repo](../til/git-filter-repo/index.qmd) was
+written in a single `.qmd` file tied to a `bash` Jupyter kernel, and configuring
+it with Quarto was relatively painless.  This style of computational writing
+seems to fit my brain a lot better, too.
+
+Some other noteworthy features I'll mention quickly:
+Quarto also [freezes][freezing] computational content, taking snapshots of
+computations that get checked into version control[^jb-cache].  This speeds up
+the rendering process, and it ensures that you don't have trouble building your
+website in [5 years time](https://www.youtube.com/watch?v=T8YCSJpF4g4) when
+dependencies grow stale!
+Quarto has great editor support too, which is a nice bonus.
+
+## Quarto Resources
+
+For a great intro on how to get started making a blog with Quarto,
+check out [this blog post][Albert Rapp] from Albert Rapp --
+I followed it closely in making this blog.
+The [Quarto Documentation][qdocs] is quite thorough as well.
+You can also check out the [source code][my-blog] to my blog to see how it's set up.
+
+[posit]: https://posit.co/
+[posit-rstudio]: https://posit.co/blog/rstudio-is-becoming-posit/
+[my-blog]: https://github.com/awray3/awray3.github.io
+[qdocs]: https://quarto.org/docs/guide/
+[gohugo]: https://gohugo.io/
+[quarto]: https://quarto.org/
+[Albert Rapp]: https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html
+[myst]: https://jupyterbook.org/en/stable/content/myst.html
+[jupyter-book]: https://jupyterbook.org/en/stable/intro.html
+[freezing]: https://quarto.org/docs/projects/code-execution.html#overview
+[quarto-hugo]: https://quarto.org/docs/output-formats/hugo.html
+[execution-caching]: https://jupyterbook.org/en/stable/content/execute.html
+
+[^jb-cache]: For comparison, Jupyter Book does something similar to this as well with [execution caching][execution-caching].
