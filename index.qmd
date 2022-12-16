@@ -12,6 +12,8 @@ about:
       href: mailto:andrew.wray2718@gmail.com
     - icon: mastodon
       href: https://fosstodon.org/@awray
+    - icon: cup
+      href: https://www.buymeacoffee.com/awray
 ---
 
 I'm Andrew Wray, and I am a data scientist and mathematician based in Seattle, WA. 
