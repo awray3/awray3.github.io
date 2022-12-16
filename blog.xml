@@ -10,7 +10,7 @@
 <atom:link href="https://awray3.github.io/blog.xml" rel="self" type="application/rss+xml"/>
 <description>My blog on computation and mathematics</description>
 <generator>quarto-1.2.269</generator>
-<lastBuildDate>Sun, 27 Nov 2022 08:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 25 Nov 2022 08:00:00 GMT</lastBuildDate>
 <item>
   <title>Migrating my blog from Hugo to Quarto</title>
   <link>https://awray3.github.io/posts/migrating-to-quarto/index.html</link>
@@ -46,7 +46,7 @@
 </section></div> ]]></description>
   <category>Quarto</category>
   <guid>https://awray3.github.io/posts/migrating-to-quarto/index.html</guid>
-  <pubDate>Sun, 27 Nov 2022 08:00:00 GMT</pubDate>
+  <pubDate>Fri, 25 Nov 2022 08:00:00 GMT</pubDate>
 </item>
 <item>
   <title>How to Alter Git Histories</title>
