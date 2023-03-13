@@ -1,8 +1,8 @@
 ---
 title: "Compu-Journal"
-description: My blog on computation and mathematics
+description: Sub-blog on more technical aspects of computation and mathematics
 listing:
-  contents: posts
+  contents: compu-journal
   sort: "date desc"
   type: default
   categories: true

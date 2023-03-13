@@ -1,5 +1,6 @@
 ---
-title: "About"
+title: "Data Stacks Machina"
+description: Welcome to my blog!
 image: static/img/profile.png
 about:
   template: solana
