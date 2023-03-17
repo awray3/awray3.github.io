@@ -1,7 +1,7 @@
 ---
 title: "Data Stacks Machina"
 description: Welcome to my blog!
-image: static/img/profile.png
+image: static/img/pretty_good_morning.jpeg
 about:
   template: solana
   links:
