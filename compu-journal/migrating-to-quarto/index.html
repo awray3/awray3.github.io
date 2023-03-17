@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2022-11-25">
 
-<title>Andrew Wray - Migrating my blog from Hugo to Quarto</title>
+<title>Data Stacks Machina - Migrating my blog from Hugo to Quarto</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -63,7 +63,7 @@ ul.task-list li input[type="checkbox"] {
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<meta property="og:title" content="Andrew Wray - Migrating my blog from Hugo to Quarto">
+<meta property="og:title" content="Data Stacks Machina - Migrating my blog from Hugo to Quarto">
 <meta property="og:description" content="I just finished migrating my blog from Hugo to Quarto. Hugo is an amazing static site generator, great for anyone looking to make a beautiful website or blog.">
 <meta property="og:site-name" content="Andrew Wray's Blog">
 </head>
@@ -76,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Andrew Wray</span>
+    <span class="navbar-title">Data Stacks Machina</span>
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -87,6 +87,10 @@ ul.task-list li input[type="checkbox"] {
   <li class="nav-item">
     <a class="nav-link" href="../../blog.html">
  <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../compu-journal.html">
+ <span class="menu-text">Compu-Journal</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../research.html">
@@ -166,7 +170,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="why-i-chose-quarto-over-hugo" class="level2">
 <h2 class="anchored" data-anchor-id="why-i-chose-quarto-over-hugo">Why I chose Quarto over Hugo</h2>
 <p>As I mentioned, Hugo is an excellent tool for generating static sites, and I had just started a blog using Hugo a few weeks ago. However, I couldn’t find a way that meshed with my brain for dealing with computational content in Hugo, like Jupyter notebooks or python scripts. The <a href="https://quarto.org/docs/output-formats/hugo.html">solution</a> I found on Quarto’s website to including computational content in Hugo involves writing Quarto <code>.qmd</code> files and rendering them into Hugo <code>.md</code> files before running Hugo. This process works if you have a well-established Hugo blog, but since mine is relatively new, I decided to migrate wholesale to Quarto and have been happy with the move.</p>
-<p>Quarto’s strength is in its handling of computational content. For example, my recent <a href="../../posts/til/git-filter-repo/index.html">blog post on git-filter-repo</a> was written in a single <code>.qmd</code> file tied to a <code>bash</code> Jupyter kernel, and configuring it with Quarto was relatively painless. This style of computational writing seems to fit my brain a lot better, too.</p>
+<p>Quarto’s strength is in its handling of computational content. For example, my recent <a href="../../compu-journal/til/git-filter-repo/index.html">blog post on git-filter-repo</a> was written in a single <code>.qmd</code> file tied to a <code>bash</code> Jupyter kernel, and configuring it with Quarto was relatively painless. This style of computational writing seems to fit my brain a lot better, too.</p>
 <p>Some other noteworthy features I’ll mention quickly: Quarto also <a href="https://quarto.org/docs/projects/code-execution.html#overview">freezes</a> computational content, taking snapshots of computations that get checked into version control<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. This speeds up the rendering process, and it ensures that you don’t have trouble building your website in <a href="https://www.youtube.com/watch?v=T8YCSJpF4g4">5 years time</a> when dependencies grow stale! Quarto has great editor support too, which is a nice bonus.</p>
 </section>
 <section id="quarto-resources" class="level2">

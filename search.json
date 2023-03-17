@@ -14,87 +14,101 @@
     "text": "In Physics\n\nHyperspherical approach to a three-boson problem in two dimensions with a magnetic field. With Seth Rittenhouse and B.L. Johnson. Appears in Phys. Rev. A 93, 2016."
   },
   {
-    "objectID": "posts/migrating-to-quarto/index.html",
-    "href": "posts/migrating-to-quarto/index.html",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Data Stacks Machina",
+    "section": "",
+    "text": "I’m Andrew Wray, and I am a data scientist and mathematician based in Seattle, WA.\nI received my Bachelor’s of Science in Math and Physics at Western Washington University in 2014, where I was recognized as WWU Math Department’s Outstanding Graduate. I completed my PhD in Algebraic Geometry at the University of Oregon in June 2020 under the guidance of Nick Addington. These days I work as a data scientist for Fullpower Technologies developing and enhancing AI-based algorithms for Sleeptracker. In my spare time I enjoy reading science fiction, playing the drums and guitar, and hanging out with my cat.\nIf you wish to get in contact with me, feel free to send me an email (andrew.wray2718 at gmail dot com) or reach out on Mastodon!\n\nViews and opinions expressed in this blog are purely my own and do not necessarily reflect the views of my employer."
+  },
+  {
+    "objectID": "blog/intro.html",
+    "href": "blog/intro.html",
+    "title": "Welcome to my blog!",
+    "section": "",
+    "text": "Hello friend! This is the first post in my new personal blog. I’m so happy you’re here and interested in reading my story! It’s going to be a fun ride. Here’s a little more about me besides what you see on the front page.\n\nMathematics, Physics, and Science\nI love understanding the world around me. When I was in high school calculus I became fascinated by Euler’s formula, and I was captivated with how everything seemed to so neatly fall into place to prove it with Taylor expansions. My love for math and physics also began at an early age with the Disney movie Flubber. (Robin Williams was my inspiration for wanting to be a math professor!) I could say so much more on these points, but remember this is only an introduction! 😉\n\n\nMusic and Dance\nThese have been there throughout my life in many different facets. At heart I am a drummer, though I love playing many instruments, guitar and bass being next in line. Besides being a music “producer” of sorts, I consume music through dance and movement as well. I taught swing dancing for a few years in Eugene, Oregon (shoutout to Track Town Swing). There is a lot more to say about this topic, so stay tuned.\n\n\nMental Health and Wellness\nI have had a very, very long and intense struggle with my mental health. I believe my true diagnosis to be complex PTSD, and I have much more to say on that at a later date. For now it’s just a fact of my existence that my upbringing was difficult, and that it left a lasting imprint on me. The upside is I am making huge strides in reigning it in, and I feel so much more grounded now than at any point I can remember. I have a lot to say about my mental health journey, though now is not the time.\n\n\nStorytelling\nAfter uncovering my inner self through my mental health journey has shown me that I have a deep appreciation for stories and however they are told. Poetry, visual art, music, books, doesn’t matter. As long as it can be used to tell a story or a lesson, I am fascinated by it. There are several books that have been hugely influential to me, and they’re all science fiction for a reason. They all deserve their own series of blog posts from me, and they will come in time.\n\nDune, by Frank Herbert\nThe Caves of Steel, by Isaac Asimov\nFoundation, by Isaac Asimov\n\nFor now, suffice it to say that everyone ought to read The Caves of Steel. It’s a story about a human detective partnering with a robot to solve a crime. The only twist is, nobody save experts in robotics can tell this robot is not a robot. The robot, named R. Daneel Olivaw, fools most people into having them think he’s a human.\nWhile the story itself is entertaining, the reason I say everyone should read it is because it can teach us a valuable lesson about how our world is going to start changing due to artificial intelligence (AI). We are seeing ChatGPT revolutionize the way people do work, and it’s going to keep escelating with the large tech giants competing to make a better AI assistant, similar to an R. Daneel Olivaw. More to come on this topic, but suffice it to say there are lessons we can all learn from this science fiction in this time of large language models (LLMs) like chatGPT et.al.\n\n\nIntersections\nI’m also interested in how all of these topics intersect! Who knows what’s hidden there? Maybe nothing. Maybe something? You decide! I will explore, and you’re welcome to follow."
+  },
+  {
+    "objectID": "compu-journal.html",
+    "href": "compu-journal.html",
+    "title": "Compu-Journal",
+    "section": "",
+    "text": "Migrating my blog from Hugo to Quarto\n\n\n\n\n\n\n\nQuarto\n\n\n\n\n\n\n\n\n\n\n\nNov 25, 2022\n\n\n\n\n\n\n\n\nHow to Alter Git Histories\n\n\n\n\n\n\n\ngit\n\n\nTIL\n\n\n\n\nRemove files from your git history with git-filter-repo\n\n\n\n\n\n\nNov 12, 2022\n\n\n\n\n\n\n\n\nTIL: Today I Learned\n\n\n\n\n\nSmall, helpful bits of whatever\n\n\n\n\n\n\nNov 11, 2022\n\n\n\n\n\n\n\n\nWelcome to My Compu-Journal!\n\n\n\n\n\n\n\nnews\n\n\n\n\nWelcome! I’m glad you’re here.\n\n\n\n\n\n\nNov 14, 2021\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "compu-journal/migrating-to-quarto/index.html",
+    "href": "compu-journal/migrating-to-quarto/index.html",
     "title": "Migrating my blog from Hugo to Quarto",
     "section": "",
     "text": "I just finished migrating my blog from Hugo to Quarto. Hugo is an amazing static site generator, great for anyone looking to make a beautiful website or blog. However, I found that Quarto supports computational material, like Jupyter notebooks, much more efficiently."
   },
   {
-    "objectID": "posts/migrating-to-quarto/index.html#intro-to-quarto",
-    "href": "posts/migrating-to-quarto/index.html#intro-to-quarto",
+    "objectID": "compu-journal/migrating-to-quarto/index.html#intro-to-quarto",
+    "href": "compu-journal/migrating-to-quarto/index.html#intro-to-quarto",
     "title": "Migrating my blog from Hugo to Quarto",
     "section": "Intro to Quarto",
     "text": "Intro to Quarto\nQuarto is a tool for compiling and publishing markdown and Jupyter notebooks into HTML, PDF, or other formats, similar to Hugo and Jupyter Book. It is based on the Quarto Markdown .qmd filetype, which is pretty similar to the MyST markdown filetype (the Jupyter Book equivalent).\nQuarto is maintained by Posit, the company that originally began as RStudio (which it still maintains). They also created R Markdown, a fantastic markup language for R projects. Quarto Markdown .qmd, their new generalization of R Markdown, is the core filetype along with Jupyter ipynb notebooks. It’s kind of like a hybrid of the two. Posit has been making high-quality editors and writing tools for quite some time, and they have continued this trend with Quarto."
   },
   {
-    "objectID": "posts/migrating-to-quarto/index.html#why-i-chose-quarto-over-hugo",
-    "href": "posts/migrating-to-quarto/index.html#why-i-chose-quarto-over-hugo",
+    "objectID": "compu-journal/migrating-to-quarto/index.html#why-i-chose-quarto-over-hugo",
+    "href": "compu-journal/migrating-to-quarto/index.html#why-i-chose-quarto-over-hugo",
     "title": "Migrating my blog from Hugo to Quarto",
     "section": "Why I chose Quarto over Hugo",
     "text": "Why I chose Quarto over Hugo\nAs I mentioned, Hugo is an excellent tool for generating static sites, and I had just started a blog using Hugo a few weeks ago. However, I couldn’t find a way that meshed with my brain for dealing with computational content in Hugo, like Jupyter notebooks or python scripts. The solution I found on Quarto’s website to including computational content in Hugo involves writing Quarto .qmd files and rendering them into Hugo .md files before running Hugo. This process works if you have a well-established Hugo blog, but since mine is relatively new, I decided to migrate wholesale to Quarto and have been happy with the move.\nQuarto’s strength is in its handling of computational content. For example, my recent blog post on git-filter-repo was written in a single .qmd file tied to a bash Jupyter kernel, and configuring it with Quarto was relatively painless. This style of computational writing seems to fit my brain a lot better, too.\nSome other noteworthy features I’ll mention quickly: Quarto also freezes computational content, taking snapshots of computations that get checked into version control1. This speeds up the rendering process, and it ensures that you don’t have trouble building your website in 5 years time when dependencies grow stale! Quarto has great editor support too, which is a nice bonus."
   },
   {
-    "objectID": "posts/migrating-to-quarto/index.html#quarto-resources",
-    "href": "posts/migrating-to-quarto/index.html#quarto-resources",
+    "objectID": "compu-journal/migrating-to-quarto/index.html#quarto-resources",
+    "href": "compu-journal/migrating-to-quarto/index.html#quarto-resources",
     "title": "Migrating my blog from Hugo to Quarto",
     "section": "Quarto Resources",
     "text": "Quarto Resources\nFor a great intro on how to get started making a blog with Quarto, check out this blog post from Albert Rapp – I followed it closely in making this blog. The Quarto Documentation is quite thorough as well. You can also check out the source code to my blog to see how it’s set up."
   },
   {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
+    "objectID": "compu-journal/welcome/index.html",
+    "href": "compu-journal/welcome/index.html",
+    "title": "Welcome to My Compu-Journal!",
     "section": "",
     "text": "Welcome to my blog! I’m new to writing blog posts, and I’m glad you’re here to enjoy it with me. This is a place for me to write down my thoughts on topics that interest me, including mathematics, physics, data science, machine learning, music, or whatever topic piques my interest."
   },
   {
-    "objectID": "posts/til/git-filter-repo/index.html",
-    "href": "posts/til/git-filter-repo/index.html",
+    "objectID": "compu-journal/til/git-filter-repo/index.html",
+    "href": "compu-journal/til/git-filter-repo/index.html",
     "title": "How to Alter Git Histories",
     "section": "",
     "text": "I recently cleaned a couple of git repos that had large data files committed early in their history, and in the process I learned about git-filter-repo, a tool for cleanly altering git histories.\nThere are many reasons you might need to modify your git history. For example, consider a local repo you want to push to Github that at some point in time had a file larger than their 100MB cap committed. In order to push to Github, you would need to not only remove the file from your repo with git rm, but also remove the file from any commit it showed up in. Another common scenario: you want to purge your git history of any accidentally tracked junk files, such as __pycache__ folders or .DS_Store files.\nIn both scenarios, the goal becomes to completely rid a file (or directory) from the git history."
   },
   {
-    "objectID": "posts/til/git-filter-repo/index.html#the-old-way-git-filter-branch",
-    "href": "posts/til/git-filter-repo/index.html#the-old-way-git-filter-branch",
+    "objectID": "compu-journal/til/git-filter-repo/index.html#the-old-way-git-filter-branch",
+    "href": "compu-journal/til/git-filter-repo/index.html#the-old-way-git-filter-branch",
     "title": "How to Alter Git Histories",
     "section": "The old way: git filter-branch",
     "text": "The old way: git filter-branch\nWhen you search around for ideas on how to rid files from histories you might find a lot of older stack-exchange posts and tutorial websites with solutions involving git filter-branch. However, according to the git filter-repo readme, filter-branch has numerous problems: it is slow, potentially unsafe for your repository, and clunky to use. For that reason I won’t describe how to use it here."
   },
   {
-    "objectID": "posts/til/git-filter-repo/index.html#enter-git-filter-repo",
-    "href": "posts/til/git-filter-repo/index.html#enter-git-filter-repo",
+    "objectID": "compu-journal/til/git-filter-repo/index.html#enter-git-filter-repo",
+    "href": "compu-journal/til/git-filter-repo/index.html#enter-git-filter-repo",
     "title": "How to Alter Git Histories",
     "section": "Enter git filter-repo",
     "text": "Enter git filter-repo\nPeople have since built simpler, more effective tools for performing git history manipulations, and the best one I’ve found is git-filter-repo. I picked it after having been convinced by their comparisons to other tools in this area. They cover many use cases in their handbook, which is worth at least glancing over."
   },
   {
-    "objectID": "posts/til/git-filter-repo/index.html#example-removing-files-from-the-git-history",
-    "href": "posts/til/git-filter-repo/index.html#example-removing-files-from-the-git-history",
+    "objectID": "compu-journal/til/git-filter-repo/index.html#example-removing-files-from-the-git-history",
+    "href": "compu-journal/til/git-filter-repo/index.html#example-removing-files-from-the-git-history",
     "title": "How to Alter Git Histories",
     "section": "Example: removing files from the git history",
-    "text": "Example: removing files from the git history\nIn this post I’ll focus on the example of removing a file from the git history. However, this works the same with directories and similarly with glob patterns or regex; see --path-glob and --path-regex.\nFor illustration, I’ll initialize an empty git repository and add two files, file_1.txt and file_2.txt, in a single commit.\n\nmkdir /tmp/new-repo && cd /tmp/new-repo\ngit init\ntouch file_1.txt file_2.txt\ngit add .\ngit commit -m \"Initial commit\"\n\nInitialized empty Git repository in /private/tmp/new-repo/.git/\n\n\n[main (root-commit) a51c6ec] Initial commit\n\n\n 2 files changed, 0 insertions(+), 0 deletions(-)\n\n\n create mode 100644 file_1.txt\n\n\n create mode 100644 file_2.txt\n\n\n\ngit log --name-status --oneline\n\na51c6ec (HEAD -> main) Initial commit\n\n\nA   file_1.txt\n\n\nA   file_2.txt\n\n\nFor this example our plan will be to delete file_2.txt from the git history without deleting file_2.txt itself.\n\nStep 1: Decaching\n“Decaching” is a word I made up for this step of “remove the file from the current git commit but keep it around in the folder.” You can do this with\n\ngit rm --cached file_2.txt\n\nrm 'file_2.txt'\n\n\nVerify by checking that ls still shows both files, and that git status shows that file_2.txt is no longer tracked.\n\nls\n\nfile_1.txt  file_2.txt\n\n\n\ngit status --short\n\nD  file_2.txt\n\n\n?? file_2.txt\n\n\n\n\nStep 2: filter-repo\nWith file_2.txt unstaged, apply filter-repo like this to delete file_2.txt from the history:\n\ngit filter-repo --path file_2.txt --invert-paths --force\n\nParsed 1 commits\n\n\nNew history written in 0.02 seconds; now repacking/cleaning...\n\n\nRepacking your repo and cleaning out old unneeded objects\n\n\nHEAD is now at 2361846 Initial commit\n\n\nEnumerating objects: 3, done.\n\n\nCounting objects:  33% (1/3)Counting objects:  66% (2/3)Counting objects: 100% (3/3)Counting objects: 100% (3/3), done.\n\n\nWriting objects:  33% (1/3)Writing objects:  66% (2/3)Writing objects: 100% (3/3)Writing objects: 100% (3/3), done.\n\n\nTotal 3 (delta 0), reused 0 (delta 0), pack-reused 0\n\n\nCompletely finished after 0.07 seconds.\n\n\nThe --path specifies the path you’re trying to target for removal, and the --invert-paths is basically the logical negation of the filtering condition, so when it’s applied it will only delete file_2.txt. When you leave that flag off, you instead delete everything except file_2.txt. You get only the file, or everything but the file.\nThe --force flag is needed because filter-repo expects us to follow best practices by only using it on a fresh clone. In practice1, you would commit all your work, get a clean git state, and make a fresh clone of your repo to operate on with filter-repo.\nNow check the files in the git log and filesystem:\n\nls\n\nfile_1.txt  file_2.txt\n\n\n\ngit log --name-status --oneline                         \n\n2361846 (HEAD -> main) Initial commit\n\n\nA   file_1.txt\n\n\nThe single commit now does not have any information pertaining to file_2.txt, and file_2.txt is still around on the filesystem. (If you just wanted to delete it completely, you could just skip the decaching step altogether.)\nThat’s all there is to it!"
+    "text": "Example: removing files from the git history\nIn this post I’ll focus on the example of removing a file from the git history. However, this works the same with directories and similarly with glob patterns or regex; see --path-glob and --path-regex.\nFor illustration, I’ll initialize an empty git repository and add two files, file_1.txt and file_2.txt, in a single commit.\n\nmkdir /tmp/new-repo && cd /tmp/new-repo\ngit init\ntouch file_1.txt file_2.txt\ngit add .\ngit commit -m \"Initial commit\"\n\nchdir: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n\n\nInitialized empty Git repository in /private/tmp/new-repo/.git/\n\n\n[main (root-commit) f4ab07f] Initial commit\n\n\n 2 files changed, 0 insertions(+), 0 deletions(-)\n\n\n create mode 100644 file_1.txt\n\n\n create mode 100644 file_2.txt\n\n\n\ngit log --name-status --oneline\n\nf4ab07f (HEAD -> main) Initial commit\n\n\nA   file_1.txt\n\n\nA   file_2.txt\n\n\nFor this example our plan will be to delete file_2.txt from the git history without deleting file_2.txt itself.\n\nStep 1: Decaching\n“Decaching” is a word I made up for this step of “remove the file from the current git commit but keep it around in the folder.” You can do this with\n\ngit rm --cached file_2.txt\n\nrm 'file_2.txt'\n\n\nVerify by checking that ls still shows both files, and that git status shows that file_2.txt is no longer tracked.\n\nls\n\nfile_1.txt  file_2.txt\n\n\n\ngit status --short\n\nD  file_2.txt\n\n\n?? file_2.txt\n\n\n\n\nStep 2: filter-repo\nWith file_2.txt unstaged, apply filter-repo like this to delete file_2.txt from the history:\n\ngit filter-repo --path file_2.txt --invert-paths --force\n\n\n\n\nParsed 1 commits\n\n\nNew history written in 0.02 seconds; now repacking/cleaning...\n\n\nRepacking your repo and cleaning out old unneeded objects\n\n\nHEAD is now at 7bcee24 Initial commit\n\n\nEnumerating objects: 3, done.\n\n\nCounting objects:  33% (1/3)\n\n\nCounting objects:  66% (2/3)\n\n\nCounting objects: 100% (3/3)\n\n\nCounting objects: 100% (3/3), done.\n\n\nWriting objects:  33% (1/3)\n\n\nWriting objects:  66% (2/3)\n\n\nWriting objects: 100% (3/3)\n\n\nWriting objects: 100% (3/3), done.\n\n\nTotal 3 (delta 0), reused 0 (delta 0), pack-reused 0\n\n\nCompletely finished after 0.07 seconds.\n\n\nThe --path specifies the path you’re trying to target for removal, and the --invert-paths is basically the logical negation of the filtering condition, so when it’s applied it will only delete file_2.txt. When you leave that flag off, you instead delete everything except file_2.txt. You get only the file, or everything but the file.\nThe --force flag is needed because filter-repo expects us to follow best practices by only using it on a fresh clone. In practice1, you would commit all your work, get a clean git state, and make a fresh clone of your repo to operate on with filter-repo.\nNow check the files in the git log and filesystem:\n\nls\n\nfile_1.txt  file_2.txt\n\n\n\ngit log --name-status --oneline                         \n\n7bcee24 (HEAD -> main) Initial commit\n\n\nA   file_1.txt\n\n\nThe single commit now does not have any information pertaining to file_2.txt, and file_2.txt is still around on the filesystem. (If you just wanted to delete it completely, you could just skip the decaching step altogether.)\nThat’s all there is to it!"
   },
   {
-    "objectID": "posts/til/til.html",
-    "href": "posts/til/til.html",
+    "objectID": "compu-journal/til/til.html",
+    "href": "compu-journal/til/til.html",
     "title": "TIL: Today I Learned",
     "section": "",
     "text": "Python Bytes recently mentioned a blog post by Simon Willison encouraging people to write more Today I Learned (TIL) blog posts. These are meant to be short explanations or demonstrations of things you learn. I will be adding more of these in the coming days!"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "About",
-    "section": "",
-    "text": "I’m Andrew Wray, and I am a data scientist and mathematician based in Seattle, WA.\nI received my Bachelor’s of Science in Math and Physics at Western Washington University in 2014, where I was recognized as WWU Math Department’s Outstanding Graduate. I completed my PhD in Algebraic Geometry at the University of Oregon in June 2020 under the guidance of Nick Addington. These days I work as a data scientist for Fullpower Technologies developing and enhancing AI-based algorithms for Sleeptracker. In my spare time I enjoy reading science fiction, playing the drums and guitar, and hanging out with my cat.\nIf you wish to get in contact with me, feel free to send me an email (andrew.wray2718 at gmail dot com) or reach out on Mastodon!\n\nViews and opinions expressed in this blog are purely my own and do not necessarily reflect the views of my employer."
-  },
-  {
     "objectID": "blog.html",
     "href": "blog.html",
-    "title": "Compu-Journal",
+    "title": "Blog",
     "section": "",
-    "text": "Migrating my blog from Hugo to Quarto\n\n\n\n\n\n\n\nQuarto\n\n\n\n\n\n\n\n\n\n\n\nNov 25, 2022\n\n\n\n\n\n\n\n\nHow to Alter Git Histories\n\n\n\n\n\n\n\ngit\n\n\nTIL\n\n\n\n\nRemove files from your git history with git-filter-repo\n\n\n\n\n\n\nNov 12, 2022\n\n\n\n\n\n\n\n\nTIL: Today I Learned\n\n\n\n\n\nSmall, helpful bits of whatever\n\n\n\n\n\n\nNov 11, 2022\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\nWelcome! I’m glad you’re here.\n\n\n\n\n\n\nNov 14, 2021\n\n\n\n\n\n\nNo matching items"
+    "text": "Welcome to my blog!\n\n\n\n\n\n\n\nblog\n\n\nstory-time\n\n\n\n\nIntroduction and tangent vector to my blogosphere\n\n\n\n\n\n\nMar 16, 2023\n\n\n\n\n\n\nNo matching items"
   }
 ]

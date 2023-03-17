@@ -2,30 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://awray3.github.io/research.html</loc>
-    <lastmod>2022-12-16T05:28:32.798Z</lastmod>
-  </url>
-  <url>
-    <loc>https://awray3.github.io/posts/migrating-to-quarto/index.html</loc>
-    <lastmod>2022-12-16T05:28:33.064Z</lastmod>
-  </url>
-  <url>
-    <loc>https://awray3.github.io/posts/welcome/index.html</loc>
-    <lastmod>2022-12-16T05:28:33.301Z</lastmod>
-  </url>
-  <url>
-    <loc>https://awray3.github.io/posts/til/git-filter-repo/index.html</loc>
-    <lastmod>2022-12-16T05:28:33.659Z</lastmod>
-  </url>
-  <url>
-    <loc>https://awray3.github.io/posts/til/til.html</loc>
-    <lastmod>2022-12-16T05:28:33.884Z</lastmod>
+    <lastmod>2023-03-17T04:22:57.767Z</lastmod>
   </url>
   <url>
     <loc>https://awray3.github.io/index.html</loc>
-    <lastmod>2022-12-16T05:28:34.133Z</lastmod>
+    <lastmod>2023-03-17T04:22:58.048Z</lastmod>
+  </url>
+  <url>
+    <loc>https://awray3.github.io/blog/intro.html</loc>
+    <lastmod>2023-03-17T04:22:58.344Z</lastmod>
+  </url>
+  <url>
+    <loc>https://awray3.github.io/compu-journal.html</loc>
+    <lastmod>2023-03-17T04:22:58.716Z</lastmod>
+  </url>
+  <url>
+    <loc>https://awray3.github.io/compu-journal/migrating-to-quarto/index.html</loc>
+    <lastmod>2023-03-17T04:22:58.985Z</lastmod>
+  </url>
+  <url>
+    <loc>https://awray3.github.io/compu-journal/welcome/index.html</loc>
+    <lastmod>2023-03-17T04:22:59.231Z</lastmod>
+  </url>
+  <url>
+    <loc>https://awray3.github.io/compu-journal/til/git-filter-repo/index.html</loc>
+    <lastmod>2023-03-17T04:22:59.584Z</lastmod>
+  </url>
+  <url>
+    <loc>https://awray3.github.io/compu-journal/til/til.html</loc>
+    <lastmod>2023-03-17T04:22:59.821Z</lastmod>
   </url>
   <url>
     <loc>https://awray3.github.io/blog.html</loc>
-    <lastmod>2022-12-16T05:28:34.420Z</lastmod>
+    <lastmod>2023-03-17T04:23:00.087Z</lastmod>
   </url>
 </urlset>
