@@ -1,0 +1,67 @@
+---
+title: "Welcome to my blog!"
+date: "2023-03-16"
+categories:
+  - ["blog"]
+  - ["story-time"]
+description: Introduction and tangent vector to my blogosphere
+---
+
+Hello friend! This is the first post in my new personal blog. I'm so happy you're here
+and interested in reading my story! It's going to be a fun ride. 
+Here's a little more about me besides what you see on the front page.
+
+# Mathematics, Physics, and Science
+
+I love understanding the world around me. When I was in high school calculus
+I became fascinated by Euler's formula, and I was captivated with how everything
+seemed to so neatly fall into place to prove it with Taylor expansions.
+My love for math and physics also began at an early age with the Disney movie Flubber.
+(Robin Williams was my inspiration for wanting to be a math professor!)
+I could say so much more on these points, but remember this is only an introduction! 😉
+
+# Music and Dance 
+
+These have been there throughout my life in many different facets. At heart I
+am a drummer, though I love playing many instruments, guitar and bass being next in line.
+Besides being a music "producer" of sorts, I consume music through dance and movement
+as well. I taught swing dancing for a few years in Eugene, Oregon (shoutout to Track Town Swing).
+There is a lot more to say about this topic, so stay tuned.
+
+# Mental Health and Wellness
+
+I have had a very, very long and intense struggle with my mental health. I believe my
+true diagnosis to be complex PTSD, and I have much more to say on that at a later date.
+For now it's just a fact of my existence that my upbringing was difficult, and that it left
+a lasting imprint on me. The upside is I am making huge strides in reigning it in, and
+I feel so much more grounded now than at any point I can remember. I have a lot
+to say about my mental health journey, though now is not the time.
+
+# Storytelling 
+
+After uncovering my inner self through my mental health journey has shown me that I have
+a deep appreciation for stories and however they are told. Poetry, visual art, music, _books_,
+doesn't matter. As long as it can be used to tell a story or a lesson, I am fascinated by it.
+There are several books that have been hugely influential to me, and they're all science fiction 
+for a reason. They all deserve their own series of blog posts from me, and they will come in time.
+
+* _Dune_, by Frank Herbert
+* _The Caves of Steel_, by Isaac Asimov
+* _Foundation_, by Isaac Asimov
+
+For now, suffice it to say that *everyone* ought to read _The Caves of Steel_. It's a story
+about a human detective partnering with a robot to solve a crime. The only twist is, _nobody_ save
+experts in robotics can tell this robot is _not_ a robot. The robot, named R. Daneel Olivaw, fools
+most people into having them think he's a human.
+
+While the story itself is entertaining, the reason I say everyone should read it is because it 
+can teach us a valuable lesson about how our world is going to start changing due to artificial 
+intelligence (AI). We are seeing ChatGPT revolutionize the way people do work, and it's going
+to keep escelating with the large tech giants competing to make a better AI assistant, similar to
+an R. Daneel Olivaw. More to come on this topic, but suffice it to say there are lessons we can
+all learn from this science fiction in this time of large language models (LLMs) like chatGPT et.al.
+
+# Intersections
+
+I'm also interested in how all of these topics intersect! Who knows what's hidden there? Maybe nothing.
+Maybe something? You decide! I will explore, and you're welcome to follow.

@@ -1,0 +1,15 @@
+---
+title: "Blog"
+description: A blog holding my thoughts pertaining to anything interesting
+listing:
+  contents: blog
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: false
+  feed: true
+page-layout: full
+title-block-banner: false
+comments: false
+---

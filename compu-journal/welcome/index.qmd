@@ -1,7 +1,7 @@
 ---
-title: "Welcome To My Blog"
+title: "Welcome to My Compu-Journal!"
 date: "2021-11-14"
-modified: "2021-12-06"
+modified: "2023-03-16"
 categories: [news]
 description: Welcome! I'm glad you're here.
 ---
