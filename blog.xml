@@ -9,51 +9,7 @@
 <link>https://awray3.github.io/blog.html</link>
 <atom:link href="https://awray3.github.io/blog.xml" rel="self" type="application/rss+xml"/>
 <description>A blog holding my thoughts pertaining to anything interesting</description>
-<generator>quarto-1.2.335</generator>
-<lastBuildDate>Thu, 16 Mar 2023 07:00:00 GMT</lastBuildDate>
-<item>
-  <title>Welcome to my blog!</title>
-  <link>https://awray3.github.io/blog/intro.html</link>
-  <description><![CDATA[ 
-
-
-
-<p>Hello friend! This is the first post in my new personal blog. I’m so happy you’re here and interested in reading my story! It’s going to be a fun ride. Here’s a little more about me besides what you see on the front page.</p>
-<section id="mathematics-physics-and-science" class="level1">
-<h1>Mathematics, Physics, and Science</h1>
-<p>I love understanding the world around me. When I was in high school calculus I became fascinated by Euler’s formula, and I was captivated with how everything seemed to so neatly fall into place to prove it with Taylor expansions. My love for math and physics also began at an early age with the Disney movie Flubber. (Robin Williams was my inspiration for wanting to be a math professor!) I could say so much more on these points, but remember this is only an introduction! 😉</p>
-</section>
-<section id="music-and-dance" class="level1">
-<h1>Music and Dance</h1>
-<p>These have been there throughout my life in many different facets. At heart I am a drummer, though I love playing many instruments, guitar and bass being next in line. Besides being a music “producer” of sorts, I consume music through dance and movement as well. I taught swing dancing for a few years in Eugene, Oregon (shoutout to Track Town Swing). There is a lot more to say about this topic, so stay tuned.</p>
-</section>
-<section id="mental-health-and-wellness" class="level1">
-<h1>Mental Health and Wellness</h1>
-<p>I have had a very, very long and intense struggle with my mental health. I believe my true diagnosis to be complex PTSD, and I have much more to say on that at a later date. For now it’s just a fact of my existence that my upbringing was difficult, and that it left a lasting imprint on me. The upside is I am making huge strides in reigning it in, and I feel so much more grounded now than at any point I can remember. I have a lot to say about my mental health journey, though now is not the time.</p>
-</section>
-<section id="storytelling" class="level1">
-<h1>Storytelling</h1>
-<p>After uncovering my inner self through my mental health journey has shown me that I have a deep appreciation for stories and however they are told. Poetry, visual art, music, <em>books</em>, doesn’t matter. As long as it can be used to tell a story or a lesson, I am fascinated by it. There are several books that have been hugely influential to me, and they’re all science fiction for a reason. They all deserve their own series of blog posts from me, and they will come in time.</p>
-<ul>
-<li><em>Dune</em>, by Frank Herbert</li>
-<li><em>The Caves of Steel</em>, by Isaac Asimov</li>
-<li><em>Foundation</em>, by Isaac Asimov</li>
-</ul>
-<p>For now, suffice it to say that <em>everyone</em> ought to read <em>The Caves of Steel</em>. It’s a story about a human detective partnering with a robot to solve a crime. The only twist is, <em>nobody</em> save experts in robotics can tell this robot is <em>not</em> a robot. The robot, named R. Daneel Olivaw, fools most people into having them think he’s a human.</p>
-<p>While the story itself is entertaining, the reason I say everyone should read it is because it can teach us a valuable lesson about how our world is going to start changing due to artificial intelligence (AI). We are seeing ChatGPT revolutionize the way people do work, and it’s going to keep escelating with the large tech giants competing to make a better AI assistant, similar to an R. Daneel Olivaw. More to come on this topic, but suffice it to say there are lessons we can all learn from this science fiction in this time of large language models (LLMs) like chatGPT et.al.</p>
-</section>
-<section id="intersections" class="level1">
-<h1>Intersections</h1>
-<p>I’m also interested in how all of these topics intersect! Who knows what’s hidden there? Maybe nothing. Maybe something? You decide! I will explore, and you’re welcome to follow.</p>
-
-
-</section>
-
- ]]></description>
-  <category>blog</category>
-  <category>story-time</category>
-  <guid>https://awray3.github.io/blog/intro.html</guid>
-  <pubDate>Thu, 16 Mar 2023 07:00:00 GMT</pubDate>
-</item>
+<generator>quarto-1.3.433</generator>
+<lastBuildDate>Sat, 12 Aug 2023 21:42:03 GMT</lastBuildDate>
 </channel>
 </rss>

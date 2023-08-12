@@ -1,39 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://awray3.github.io/research.html</loc>
-    <lastmod>2023-03-17T04:22:57.767Z</lastmod>
-  </url>
-  <url>
-    <loc>https://awray3.github.io/index.html</loc>
-    <lastmod>2023-03-17T04:22:58.048Z</lastmod>
-  </url>
-  <url>
-    <loc>https://awray3.github.io/blog/intro.html</loc>
-    <lastmod>2023-03-17T04:22:58.344Z</lastmod>
-  </url>
-  <url>
-    <loc>https://awray3.github.io/compu-journal.html</loc>
-    <lastmod>2023-03-17T04:22:58.716Z</lastmod>
-  </url>
-  <url>
-    <loc>https://awray3.github.io/compu-journal/migrating-to-quarto/index.html</loc>
-    <lastmod>2023-03-17T04:22:58.985Z</lastmod>
-  </url>
-  <url>
-    <loc>https://awray3.github.io/compu-journal/welcome/index.html</loc>
-    <lastmod>2023-03-17T04:22:59.231Z</lastmod>
+    <loc>https://awray3.github.io/blog.html</loc>
+    <lastmod>2023-08-12T21:42:03.253Z</lastmod>
   </url>
   <url>
     <loc>https://awray3.github.io/compu-journal/til/git-filter-repo/index.html</loc>
-    <lastmod>2023-03-17T04:22:59.584Z</lastmod>
+    <lastmod>2023-08-12T21:42:02.834Z</lastmod>
+  </url>
+  <url>
+    <loc>https://awray3.github.io/compu-journal/migrating-to-quarto/index.html</loc>
+    <lastmod>2023-08-12T21:42:01.427Z</lastmod>
+  </url>
+  <url>
+    <loc>https://awray3.github.io/index.html</loc>
+    <lastmod>2023-08-12T21:42:00.770Z</lastmod>
+  </url>
+  <url>
+    <loc>https://awray3.github.io/research.html</loc>
+    <lastmod>2023-08-12T21:42:00.534Z</lastmod>
+  </url>
+  <url>
+    <loc>https://awray3.github.io/compu-journal.html</loc>
+    <lastmod>2023-08-12T21:42:01.155Z</lastmod>
+  </url>
+  <url>
+    <loc>https://awray3.github.io/compu-journal/welcome/index.html</loc>
+    <lastmod>2023-08-12T21:42:01.628Z</lastmod>
   </url>
   <url>
     <loc>https://awray3.github.io/compu-journal/til/til.html</loc>
-    <lastmod>2023-03-17T04:22:59.821Z</lastmod>
-  </url>
-  <url>
-    <loc>https://awray3.github.io/blog.html</loc>
-    <lastmod>2023-03-17T04:23:00.087Z</lastmod>
+    <lastmod>2023-08-12T21:42:03.049Z</lastmod>
   </url>
 </urlset>

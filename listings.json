@@ -1,17 +1,15 @@
 [
   {
+    "listing": "/blog.html",
+    "items": []
+  },
+  {
     "listing": "/compu-journal.html",
     "items": [
       "/compu-journal/migrating-to-quarto/index.html",
       "/compu-journal/til/git-filter-repo/index.html",
       "/compu-journal/til/til.html",
       "/compu-journal/welcome/index.html"
-    ]
-  },
-  {
-    "listing": "/blog.html",
-    "items": [
-      "/blog/intro.html"
     ]
   }
 ]

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2023-03-19">
+<meta name="description" content="Discussion and analysis of the Quantum Hall Effect (QHE) in Julia.">
+
+<title>Data Stacks Machina - On the Quantum Hall Effect</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../static/img/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<meta property="og:title" content="Data Stacks Machina - On the Quantum Hall Effect">
+<meta property="og:description" content="Discussion and analysis of the Quantum Hall Effect (QHE) in Julia.">
+<meta property="og:site-name" content="Andrew Wray's Blog">
+</head><body class="nav-fixed">\usepackage{braket}
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+
+
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Data Stacks Machina</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../compu-journal.html">
+ <span class="menu-text">Compu-Journal</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../research.html">
+ <span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/awray3"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://fosstodon.org/@awray"><i class="bi bi-mastodon" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../blog.xml"><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#quantum-hall-effect" id="toc-quantum-hall-effect" class="nav-link active" data-scroll-target="#quantum-hall-effect">Quantum Hall Effect</a>
+  <ul class="collapse">
+  <li><a href="#single-particle-problem-and-solution" id="toc-single-particle-problem-and-solution" class="nav-link" data-scroll-target="#single-particle-problem-and-solution">Single particle problem and solution</a></li>
+  <li><a href="#landau-levels" id="toc-landau-levels" class="nav-link" data-scroll-target="#landau-levels">Landau Levels</a>
+  <ul class="collapse">
+  <li><a href="#alternative-explanation-using-complex-analysis" id="toc-alternative-explanation-using-complex-analysis" class="nav-link" data-scroll-target="#alternative-explanation-using-complex-analysis">Alternative explanation using complex analysis</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">On the Quantum Hall Effect</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Quantum Mechanics</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Discussion and analysis of the Quantum Hall Effect (QHE) in Julia.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 19, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="quantum-hall-effect" class="level1">
+<h1>Quantum Hall Effect</h1>
+<p>This starts from the discussion on landau levels in Shankar’s <em>principles of quantum mechanics</em>.</p>
+<p>Notations:</p>
+
+<!-- https://www.tablesgenerator.com/markdown_tables# -->
+<table class="table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 22%">
+<col style="width: 51%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>constant</th>
+<th>name</th>
+<th>value</th>
+<th>value here</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\hbar\)</span></td>
+<td>Planck’s constant</td>
+<td><span class="math inline">\(6.62607015 \times 10^{-34} \, J \cdot s\)</span></td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(c\)</span></td>
+<td>speed of light</td>
+<td><span class="math inline">\(299,792,458 \, m/s\)</span></td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<section id="single-particle-problem-and-solution" class="level2">
+<h2 class="anchored" data-anchor-id="single-particle-problem-and-solution">Single particle problem and solution</h2>
+<p>This comes from Landau Levels section in Shankar.</p>
+<p>Consider a single particle of mass <span class="math inline">\(m\)</span> and charge <span class="math inline">\(q\)</span> in the <span class="math inline">\(x\)</span>-<span class="math inline">\(y\)</span> plane. Then imagine a magnetic field <span class="math inline">\(\mathrm{B} = B \hat{z}\)</span> pointing perpendicularly to the plane.</p>
+<p>(There is an exercise in Shankar’s book to fill in the details of the argument below. I will come back later to do so with either Python or Julia.)</p>
+<p>Write the vector potential as <span class="math inline">\(A = B/2 (-y \hat{x} + x \hat{y})\)</span>. Then the Hamiltonian for the system is <span class="math display">\[
+  H = \frac{(P_x + qYB/2c)^2}{2m} + \frac{(P_x - qXB/2c)^2}{2 m}.
+\]</span></p>
+<p>Also, if we define the operators <span class="math inline">\(Q\)</span> and <span class="math inline">\(P\)</span> by <span class="math display">\[
+\begin{align}
+  Q &amp;= \frac{cP_x + q Y B/2}{q B} \\
+  P &amp;= P_y - qBX/2c
+\end{align}
+\]</span> then they satisfy the canonical commutation relation <span class="math inline">\([Q, P] = i \hbar\)</span>, and the Hamiltonian may be rewritten with these variables as <span class="math display">\[
+H = \frac{P^2}{2m} + \frac{1}{2}m \omega_0^2 Q^2
+\]</span> where <span class="math inline">\(\omega_0 = qB/mc\)</span> is the <em>cyclotron frequency</em>.</p>
+<p>We can define the <em>annihilation operator</em> <span class="math inline">\(a\)</span> by <span class="math display">\[
+a = \left(\frac{m \omega_0}{2 \hbar}\right)^{1/2} Q + i \left(\frac{1}{2m\omega_0 \hbar}\right)^{1/2} P
+\]</span> and the <em>creation operator</em> <span class="math inline">\(a^\dagger\)</span>, the adjoint of <span class="math inline">\(a\)</span> (with respect to the <span class="math inline">\(L^2\)</span> inner product most likely). With these the Hamiltonian <span class="math inline">\(H\)</span> becomes <span class="math display">\[
+  H = (a^\dagger a + \frac{1}{2}) \hbar \omega_0.
+\]</span></p>
+<p>Shankar then points out that the Hamiltonian for a 2D problem reduces to a Hamiltonian for a 1D problem. This oddity of the dimension reduction can be explained by the presence of another pair of canonical variables <span class="math inline">\((Q', P')\)</span>, defined by swapping the <span class="math inline">\(+\)</span> and <span class="math inline">\(-\)</span> sign in the definition of the pair <span class="math inline">\((Q, P)\)</span> above. So we actually have <em>four</em> operators <span class="math inline">\(Q, Q', P, P'\)</span> with <span class="math inline">\([Q, P] = [Q', P'] = i\hbar\)</span>, which otherwise commute.</p>
+<p>From the lens of quantum field theory, it just sounds like we’re talking about a 2D QFT whose Hamiltonian only cares about one of the coordinates.</p>
+</section>
+<section id="landau-levels" class="level2">
+<h2 class="anchored" data-anchor-id="landau-levels">Landau Levels</h2>
+<p>Sticking with that realization, it’s not at all surprising that we can index the eigenstates of <span class="math inline">\(H\)</span> with two quantum numbers, perhaps <span class="math inline">\(m\)</span> (oh no a notation clash… anyway, moving on) and <span class="math inline">\(n\)</span>, where one index, say <span class="math inline">\(m\)</span>, has <em>no</em> effect on the energy - it’s the free particle quantum number for the “direction” <span class="math inline">\(Q'\)</span>. The other quantum number, <span class="math inline">\(n\)</span>, corresponds with the energy levels of the harmonic oscillator that we reduced it to above: <span class="math display">\[
+  E_{m, n} = E_n = (n + 1/2)\hbar \omega_0
+\]</span> The fact that the energy does not depend on <span class="math inline">\(m\)</span> shows that each <em>Landau level</em> (indexed by <span class="math inline">\(n\)</span>) is <em>infinitely degenerate</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>The “manifold of states”<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> that is the set of integers <span class="math inline">\((m,n)\)</span> indexing the eigenstates of <span class="math inline">\(H\)</span> is interseting to visualize. <span class="math inline">\(m\)</span> is allowed to be any integer, while <span class="math inline">\(n\)</span> is allowed to only be nonnegative.</p>
+<section id="alternative-explanation-using-complex-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="alternative-explanation-using-complex-analysis">Alternative explanation using complex analysis</h3>
+<p>There is another way to do this using complex analysis. (Or I don’t know, maybe it’s all the same somehow.)</p>
+<p>Start by considering the complex variable <span class="math inline">\(z=x+iy\)</span>, with <span class="math inline">\(\bar{z}=x-iy\)</span> being the complex conjugate (sorry physicists). The ground state(s), i.e.&nbsp;the <span class="math inline">\(n=0\)</span> eigenvectors denoted by <span class="math inline">\(\ket{0}\)</span>, satisfy<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <span class="math display">\[
+  a \ket{0} = 0.
+\]</span> Let’s now expand this all the way back down to the original position and momentum operators, <span class="math inline">\(X\)</span>, and <span class="math inline">\(Y\)</span>.</p>
+<section id="to-get-to" class="level4">
+<h4 class="anchored" data-anchor-id="to-get-to">To get to</h4>
+<p><span class="math display">\[
+\left(\frac{\partial}{\partial \bar{z}} + \gamma z \right) \psi_0(z, \bar{z}) =0
+\]</span> where <span class="math inline">\(\gamma = qB/4\hbar c\)</span>.</p>
+<p>With ansatz <span class="math display">\[
+\psi_0 = \exp(-\gamma z \bar{z}) u(z, \bar{z})
+\]</span> you can find that <span class="math inline">\(\bar\partial u = 0\)</span>, i.e.&nbsp;that <span class="math inline">\(u\)</span> is a holomorphic function.</p>
+<p>Hmm, so taking <span class="math inline">\(z^m\)</span> as a basis for the space of holomorphic functions is what Shankar and others do. But what other “bases” might there be? Interesting. As a mathematician I would think to be a bit more careful about how we put an inner product or banach space structure on the space of holomorphic functions. Perhaps some of the odd things they keep saying about “fitting L3s into a disk” can be made more precise by solving a boundary value problem instead of the <span class="math inline">\(Q'\)</span> “direction” being a free particle.</p>
+<!-- considering the lowest Landau level (L3 in my parlance! or LLL in Shankar's text). -->
+
+
+</section>
+</section>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>An energy level is called <em>degenerate</em> if the span of the associated eigenfunctions is at least 2 dimensional. To have infinite dimensionality is quite special!<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>I don’t believe this is a manifold in the mathematical sense of the term. More likely it’s meant in a “many-fold” kind of way.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Here, it’s important to realize that <span class="math inline">\(\ket{0}\)</span> is not the zero vector in whatever Hilbert space we’re referring to. It represents an eigenvector in the <span class="math inline">\(n=0\)</span> energy level. The <span class="math inline">\(0\)</span> on the right-hand side <em>is</em> the zero vector.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
