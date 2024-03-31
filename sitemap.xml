@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://awray3.github.io/blog.html</loc>
-    <lastmod>2023-08-28T20:56:54.496Z</lastmod>
-  </url>
-  <url>
-    <loc>https://awray3.github.io/compu-journal/til/git-filter-repo/index.html</loc>
-    <lastmod>2023-08-28T20:56:54.071Z</lastmod>
-  </url>
-  <url>
-    <loc>https://awray3.github.io/compu-journal/migrating-to-quarto/index.html</loc>
-    <lastmod>2023-08-28T20:56:52.596Z</lastmod>
-  </url>
-  <url>
-    <loc>https://awray3.github.io/index.html</loc>
-    <lastmod>2023-08-28T20:56:51.940Z</lastmod>
-  </url>
-  <url>
-    <loc>https://awray3.github.io/research.html</loc>
-    <lastmod>2023-08-28T20:56:51.685Z</lastmod>
-  </url>
-  <url>
-    <loc>https://awray3.github.io/compu-journal.html</loc>
-    <lastmod>2023-08-28T20:56:52.304Z</lastmod>
+    <loc>https://awray3.github.io/compu-journal/til/til.html</loc>
+    <lastmod>2023-03-17T04:21:43.299Z</lastmod>
   </url>
   <url>
     <loc>https://awray3.github.io/compu-journal/welcome/index.html</loc>
-    <lastmod>2023-08-28T20:56:52.807Z</lastmod>
+    <lastmod>2023-03-17T04:21:43.299Z</lastmod>
   </url>
   <url>
-    <loc>https://awray3.github.io/compu-journal/til/til.html</loc>
-    <lastmod>2023-08-28T20:56:54.283Z</lastmod>
+    <loc>https://awray3.github.io/compu-journal.html</loc>
+    <lastmod>2023-03-17T04:21:43.298Z</lastmod>
+  </url>
+  <url>
+    <loc>https://awray3.github.io/research.html</loc>
+    <lastmod>2022-12-04T21:22:16.409Z</lastmod>
+  </url>
+  <url>
+    <loc>https://awray3.github.io/index.html</loc>
+    <lastmod>2023-08-28T20:56:15.991Z</lastmod>
+  </url>
+  <url>
+    <loc>https://awray3.github.io/compu-journal/migrating-to-quarto/index.html</loc>
+    <lastmod>2023-03-17T04:21:43.299Z</lastmod>
+  </url>
+  <url>
+    <loc>https://awray3.github.io/compu-journal/til/git-filter-repo/index.html</loc>
+    <lastmod>2023-03-17T04:21:43.299Z</lastmod>
   </url>
 </urlset>

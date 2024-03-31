@@ -9,12 +9,13 @@
 <link>https://awray3.github.io/compu-journal.html</link>
 <atom:link href="https://awray3.github.io/compu-journal.xml" rel="self" type="application/rss+xml"/>
 <description>Sub-blog on more technical aspects of computation and mathematics</description>
-<generator>quarto-1.3.433</generator>
+<generator>quarto-1.4.549</generator>
 <lastBuildDate>Fri, 25 Nov 2022 08:00:00 GMT</lastBuildDate>
 <item>
   <title>Migrating my blog from Hugo to Quarto</title>
-  <link>https://awray3.github.io/compu-journal/migrating-to-quarto/index.html</link>
+  <link>https://awray3.github.io/compu-journal/migrating-to-quarto/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -45,13 +46,14 @@
 </ol>
 </section></div> ]]></description>
   <category>Quarto</category>
-  <guid>https://awray3.github.io/compu-journal/migrating-to-quarto/index.html</guid>
+  <guid>https://awray3.github.io/compu-journal/migrating-to-quarto/</guid>
   <pubDate>Fri, 25 Nov 2022 08:00:00 GMT</pubDate>
 </item>
 <item>
   <title>How to Alter Git Histories</title>
-  <link>https://awray3.github.io/compu-journal/til/git-filter-repo/index.html</link>
+  <link>https://awray3.github.io/compu-journal/til/git-filter-repo/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -272,13 +274,14 @@ font-style: inherit;">--oneline</span>                         </span></code></p
 </section></div> ]]></description>
   <category>git</category>
   <category>TIL</category>
-  <guid>https://awray3.github.io/compu-journal/til/git-filter-repo/index.html</guid>
+  <guid>https://awray3.github.io/compu-journal/til/git-filter-repo/</guid>
   <pubDate>Sat, 12 Nov 2022 08:00:00 GMT</pubDate>
 </item>
 <item>
   <title>TIL: Today I Learned</title>
   <link>https://awray3.github.io/compu-journal/til/til.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -292,8 +295,9 @@ font-style: inherit;">--oneline</span>                         </span></code></p
 </item>
 <item>
   <title>Welcome to My Compu-Journal!</title>
-  <link>https://awray3.github.io/compu-journal/welcome/index.html</link>
+  <link>https://awray3.github.io/compu-journal/welcome/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -303,7 +307,7 @@ font-style: inherit;">--oneline</span>                         </span></code></p
 
  ]]></description>
   <category>news</category>
-  <guid>https://awray3.github.io/compu-journal/welcome/index.html</guid>
+  <guid>https://awray3.github.io/compu-journal/welcome/</guid>
   <pubDate>Sun, 14 Nov 2021 08:00:00 GMT</pubDate>
 </item>
 </channel>

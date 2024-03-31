@@ -1,9 +1,5 @@
 [
   {
-    "listing": "/blog.html",
-    "items": []
-  },
-  {
     "listing": "/compu-journal.html",
     "items": [
       "/compu-journal/migrating-to-quarto/index.html",
