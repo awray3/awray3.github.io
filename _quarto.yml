@@ -10,8 +10,6 @@ website:
     site-name: "Andrew Wray's Blog"
   navbar:
     right:
-      - text: Blog
-        href: blog.qmd
       - text: Compu-Journal
         href: compu-journal.qmd
       - text: Research
