@@ -12,9 +12,11 @@ $code-block-bg-alpha: 0.5;
 
 /*-- scss:rules --*/
 // this is where normal css goes
-code {
+code, p code:not(.sourceCode) {
     color: #8fb5d6;
+    background-color: #3e444a;
 }
+
 
 // These two blocks essentially make the output code look
 // more like a terminal output.
