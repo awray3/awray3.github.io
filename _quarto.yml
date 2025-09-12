@@ -16,8 +16,6 @@ website:
         href: research.qmd
       - icon: github
         href: https://github.com/awray3
-      - icon: mastodon
-        href: https://fosstodon.org/@awray
       - icon: rss
         href: blog.xml
 format:
