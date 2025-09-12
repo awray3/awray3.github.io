@@ -4,42 +4,14 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "Migrating my blog from Hugo to Quarto\n\n\n\nQuarto\n\n\n\n\n\n\n\n\n\nNov 25, 2022\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Alter Git Histories\n\n\n\ngit\n\nTIL\n\n\n\nRemove files from your git history with git-filter-repo\n\n\n\n\n\nNov 12, 2022\n\n\n\n\n\nNo matching items"
+    "text": "How to Alter Git Histories\n\n\n\ngit\n\nTIL\n\n\n\nRemove files from your git history with git-filter-repo\n\n\n\n\n\nNov 12, 2022\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "blog/migrating-to-quarto/index.html",
-    "href": "blog/migrating-to-quarto/index.html",
-    "title": "Migrating my blog from Hugo to Quarto",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Andrew Wray",
     "section": "",
-    "text": "I just finished migrating my blog from Hugo to Quarto. Hugo is an amazing static site generator, great for anyone looking to make a beautiful website or blog. However, I found that Quarto supports computational material, like Jupyter notebooks, much more efficiently."
-  },
-  {
-    "objectID": "blog/migrating-to-quarto/index.html#intro-to-quarto",
-    "href": "blog/migrating-to-quarto/index.html#intro-to-quarto",
-    "title": "Migrating my blog from Hugo to Quarto",
-    "section": "Intro to Quarto",
-    "text": "Intro to Quarto\nQuarto is a tool for compiling and publishing markdown and Jupyter notebooks into HTML, PDF, or other formats, similar to Hugo and Jupyter Book. It is based on the Quarto Markdown .qmd filetype, which is pretty similar to the MyST markdown filetype (the Jupyter Book equivalent).\nQuarto is maintained by Posit, the company that originally began as RStudio (which it still maintains). They also created R Markdown, a fantastic markup language for R projects. Quarto Markdown .qmd, their new generalization of R Markdown, is the core filetype along with Jupyter ipynb notebooks. It’s kind of like a hybrid of the two. Posit has been making high-quality editors and writing tools for quite some time, and they have continued this trend with Quarto."
-  },
-  {
-    "objectID": "blog/migrating-to-quarto/index.html#why-i-chose-quarto-over-hugo",
-    "href": "blog/migrating-to-quarto/index.html#why-i-chose-quarto-over-hugo",
-    "title": "Migrating my blog from Hugo to Quarto",
-    "section": "Why I chose Quarto over Hugo",
-    "text": "Why I chose Quarto over Hugo\nAs I mentioned, Hugo is an excellent tool for generating static sites, and I had just started a blog using Hugo a few weeks ago. However, I couldn’t find a way that meshed with my brain for dealing with computational content in Hugo, like Jupyter notebooks or python scripts. The solution I found on Quarto’s website to including computational content in Hugo involves writing Quarto .qmd files and rendering them into Hugo .md files before running Hugo. This process works if you have a well-established Hugo blog, but since mine is relatively new, I decided to migrate wholesale to Quarto and have been happy with the move.\nQuarto’s strength is in its handling of computational content. For example, my recent blog post on git-filter-repo was written in a single .qmd file tied to a bash Jupyter kernel, and configuring it with Quarto was relatively painless. This style of computational writing seems to fit my brain a lot better, too.\nSome other noteworthy features I’ll mention quickly: Quarto also freezes computational content, taking snapshots of computations that get checked into version control1. This speeds up the rendering process, and it ensures that you don’t have trouble building your website in 5 years time when dependencies grow stale! Quarto has great editor support too, which is a nice bonus."
-  },
-  {
-    "objectID": "blog/migrating-to-quarto/index.html#quarto-resources",
-    "href": "blog/migrating-to-quarto/index.html#quarto-resources",
-    "title": "Migrating my blog from Hugo to Quarto",
-    "section": "Quarto Resources",
-    "text": "Quarto Resources\nFor a great intro on how to get started making a blog with Quarto, check out this blog post from Albert Rapp – I followed it closely in making this blog. The Quarto Documentation is quite thorough as well. You can also check out the source code to my blog to see how it’s set up."
-  },
-  {
-    "objectID": "blog/migrating-to-quarto/index.html#footnotes",
-    "href": "blog/migrating-to-quarto/index.html#footnotes",
-    "title": "Migrating my blog from Hugo to Quarto",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nFor comparison, Jupyter Book does something similar to this as well with execution caching.↩︎"
+    "text": "I’m Andrew Wray, and I am a data scientist and mathematician based in Seattle, WA.\nI received my Bachelor’s of Science in Math and Physics at Western Washington University in 2014, where I was recognized as WWU Math Department’s Outstanding Graduate. I completed my PhD in Algebraic Geometry at the University of Oregon in June 2020 under the guidance of Nick Addington. These days I work as a data scientist for Fullpower Technologies developing and enhancing AI-based algorithms for Sleeptracker.\nIf you wish to get in contact with me, feel free to send me an email (andrew.wray2718 at gmail dot com) or reach out on LinkedIn."
   },
   {
     "objectID": "research.html",
@@ -61,13 +33,6 @@
     "title": "Research",
     "section": "In Physics",
     "text": "In Physics\n\nHyperspherical approach to a three-boson problem in two dimensions with a magnetic field. With Seth Rittenhouse and B.L. Johnson. Appears in Phys. Rev. A 93, 2016."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Andrew Wray",
-    "section": "",
-    "text": "I’m Andrew Wray, and I am a data scientist and mathematician based in Seattle, WA.\nI received my Bachelor’s of Science in Math and Physics at Western Washington University in 2014, where I was recognized as WWU Math Department’s Outstanding Graduate. I completed my PhD in Algebraic Geometry at the University of Oregon in June 2020 under the guidance of Nick Addington. These days I work as a data scientist for Fullpower Technologies developing and enhancing AI-based algorithms for Sleeptracker.\nIf you wish to get in contact with me, feel free to send me an email (andrew.wray2718 at gmail dot com) or reach out on LinkedIn."
   },
   {
     "objectID": "blog/til/git-filter-repo/index.html",

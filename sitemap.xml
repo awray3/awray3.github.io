@@ -2,22 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://awray3.github.io/blog.html</loc>
-    <lastmod>2025-09-12T01:49:39.685Z</lastmod>
-  </url>
-  <url>
-    <loc>https://awray3.github.io/blog/migrating-to-quarto/index.html</loc>
-    <lastmod>2025-09-12T01:49:39.685Z</lastmod>
-  </url>
-  <url>
-    <loc>https://awray3.github.io/research.html</loc>
-    <lastmod>2025-09-12T01:49:35.936Z</lastmod>
+    <lastmod>2025-09-12T23:41:07.534Z</lastmod>
   </url>
   <url>
     <loc>https://awray3.github.io/index.html</loc>
-    <lastmod>2025-09-12T01:50:52.029Z</lastmod>
+    <lastmod>2025-09-12T23:41:07.535Z</lastmod>
+  </url>
+  <url>
+    <loc>https://awray3.github.io/research.html</loc>
+    <lastmod>2025-09-12T23:41:07.535Z</lastmod>
   </url>
   <url>
     <loc>https://awray3.github.io/blog/til/git-filter-repo/index.html</loc>
-    <lastmod>2025-09-12T01:49:39.685Z</lastmod>
+    <lastmod>2025-09-12T23:41:07.535Z</lastmod>
   </url>
 </urlset>

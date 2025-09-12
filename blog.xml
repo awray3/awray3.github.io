@@ -10,45 +10,7 @@
 <atom:link href="https://awray3.github.io/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website and blog of Andrew Wray</description>
 <generator>quarto-1.7.34</generator>
-<lastBuildDate>Fri, 25 Nov 2022 08:00:00 GMT</lastBuildDate>
-<item>
-  <title>Migrating my blog from Hugo to Quarto</title>
-  <link>https://awray3.github.io/blog/migrating-to-quarto/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>I just finished migrating my blog from <a href="https://gohugo.io/">Hugo</a> to <a href="https://quarto.org/">Quarto</a>. Hugo is an amazing static site generator, great for anyone looking to make a beautiful website or blog. However, I found that Quarto supports computational material, like Jupyter notebooks, much more efficiently.</p>
-<section id="intro-to-quarto" class="level2">
-<h2 class="anchored" data-anchor-id="intro-to-quarto">Intro to Quarto</h2>
-<p>Quarto is a tool for compiling and publishing markdown and Jupyter notebooks into HTML, PDF, or other formats, similar to Hugo and <a href="https://jupyterbook.org/en/stable/intro.html">Jupyter Book</a>. It is based on the Quarto Markdown <code>.qmd</code> filetype, which is pretty similar to the <a href="https://jupyterbook.org/en/stable/content/myst.html">MyST markdown</a> filetype (the Jupyter Book equivalent).</p>
-<p>Quarto is maintained by <a href="https://posit.co/">Posit</a>, the company that <a href="https://posit.co/blog/rstudio-is-becoming-posit/">originally began</a> as RStudio (which it still maintains). They also created R Markdown, a fantastic markup language for R projects. Quarto Markdown <code>.qmd</code>, their new generalization of R Markdown, is the core filetype along with Jupyter <code>ipynb</code> notebooks. It’s kind of like a hybrid of the two. Posit has been making high-quality editors and writing tools for quite some time, and they have continued this trend with Quarto.</p>
-</section>
-<section id="why-i-chose-quarto-over-hugo" class="level2">
-<h2 class="anchored" data-anchor-id="why-i-chose-quarto-over-hugo">Why I chose Quarto over Hugo</h2>
-<p>As I mentioned, Hugo is an excellent tool for generating static sites, and I had just started a blog using Hugo a few weeks ago. However, I couldn’t find a way that meshed with my brain for dealing with computational content in Hugo, like Jupyter notebooks or python scripts. The <a href="https://quarto.org/docs/output-formats/hugo.html">solution</a> I found on Quarto’s website to including computational content in Hugo involves writing Quarto <code>.qmd</code> files and rendering them into Hugo <code>.md</code> files before running Hugo. This process works if you have a well-established Hugo blog, but since mine is relatively new, I decided to migrate wholesale to Quarto and have been happy with the move.</p>
-<p>Quarto’s strength is in its handling of computational content. For example, my recent <a href="../../blog/til/git-filter-repo/index.html">blog post on git-filter-repo</a> was written in a single <code>.qmd</code> file tied to a <code>bash</code> Jupyter kernel, and configuring it with Quarto was relatively painless. This style of computational writing seems to fit my brain a lot better, too.</p>
-<p>Some other noteworthy features I’ll mention quickly: Quarto also <a href="https://quarto.org/docs/projects/code-execution.html#overview">freezes</a> computational content, taking snapshots of computations that get checked into version control<sup>1</sup>. This speeds up the rendering process, and it ensures that you don’t have trouble building your website in <a href="https://www.youtube.com/watch?v=T8YCSJpF4g4">5 years time</a> when dependencies grow stale! Quarto has great editor support too, which is a nice bonus.</p>
-</section>
-<section id="quarto-resources" class="level2">
-<h2 class="anchored" data-anchor-id="quarto-resources">Quarto Resources</h2>
-<p>For a great intro on how to get started making a blog with Quarto, check out <a href="https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html">this blog post</a> from Albert Rapp – I followed it closely in making this blog. The <a href="https://quarto.org/docs/guide/">Quarto Documentation</a> is quite thorough as well. You can also check out the <a href="https://github.com/awray3/awray3.github.io">source code</a> to my blog to see how it’s set up.</p>
-
-
-</section>
-
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>For comparison, Jupyter Book does something similar to this as well with <a href="https://jupyterbook.org/en/stable/content/execute.html">execution caching</a>.↩︎</p></li>
-</ol>
-</section></div> ]]></description>
-  <category>Quarto</category>
-  <guid>https://awray3.github.io/blog/migrating-to-quarto/</guid>
-  <pubDate>Fri, 25 Nov 2022 08:00:00 GMT</pubDate>
-</item>
+<lastBuildDate>Sat, 12 Nov 2022 08:00:00 GMT</lastBuildDate>
 <item>
   <title>How to Alter Git Histories</title>
   <link>https://awray3.github.io/blog/til/git-filter-repo/</link>
