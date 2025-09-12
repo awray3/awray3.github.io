@@ -1,8 +1,7 @@
 ---
-title: "Compu-Journal"
-description: Sub-blog on more technical aspects of computation and mathematics
+title: "Blog"
 listing:
-  contents: compu-journal
+  contents: blog
   sort: "date desc"
   type: default
   categories: true

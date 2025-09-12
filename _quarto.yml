@@ -6,12 +6,12 @@ website:
   site-url: https://awray3.github.io
   favicon: static/img/favicon.ico
   description: Personal website and blog of Andrew Wray
-  open-graph: 
+  open-graph:
     site-name: "Andrew Wray's Blog"
   navbar:
     right:
-      - text: Compu-Journal
-        href: compu-journal.qmd
+      - text: Blog
+        href: blog.qmd
       - text: Research
         href: research.qmd
       - icon: github
@@ -22,7 +22,7 @@ website:
         href: blog.xml
 format:
   html:
-    theme: 
+    theme:
       - slate
       - static/css/dark.scss
     monofont: CaskaydiaCove Nerd Font, Monaco
