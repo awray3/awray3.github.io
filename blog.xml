@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Andrew Wray</title>
+<link>https://awray3.github.io/blog.html</link>
+<atom:link href="https://awray3.github.io/blog.xml" rel="self" type="application/rss+xml"/>
+<description>Personal website and blog of Andrew Wray</description>
+<generator>quarto-1.7.34</generator>
+<lastBuildDate>Fri, 25 Nov 2022 08:00:00 GMT</lastBuildDate>
+<item>
+  <title>Migrating my blog from Hugo to Quarto</title>
+  <link>https://awray3.github.io/blog/migrating-to-quarto/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>I just finished migrating my blog from <a href="https://gohugo.io/">Hugo</a> to <a href="https://quarto.org/">Quarto</a>. Hugo is an amazing static site generator, great for anyone looking to make a beautiful website or blog. However, I found that Quarto supports computational material, like Jupyter notebooks, much more efficiently.</p>
+<section id="intro-to-quarto" class="level2">
+<h2 class="anchored" data-anchor-id="intro-to-quarto">Intro to Quarto</h2>
+<p>Quarto is a tool for compiling and publishing markdown and Jupyter notebooks into HTML, PDF, or other formats, similar to Hugo and <a href="https://jupyterbook.org/en/stable/intro.html">Jupyter Book</a>. It is based on the Quarto Markdown <code>.qmd</code> filetype, which is pretty similar to the <a href="https://jupyterbook.org/en/stable/content/myst.html">MyST markdown</a> filetype (the Jupyter Book equivalent).</p>
+<p>Quarto is maintained by <a href="https://posit.co/">Posit</a>, the company that <a href="https://posit.co/blog/rstudio-is-becoming-posit/">originally began</a> as RStudio (which it still maintains). They also created R Markdown, a fantastic markup language for R projects. Quarto Markdown <code>.qmd</code>, their new generalization of R Markdown, is the core filetype along with Jupyter <code>ipynb</code> notebooks. It’s kind of like a hybrid of the two. Posit has been making high-quality editors and writing tools for quite some time, and they have continued this trend with Quarto.</p>
+</section>
+<section id="why-i-chose-quarto-over-hugo" class="level2">
+<h2 class="anchored" data-anchor-id="why-i-chose-quarto-over-hugo">Why I chose Quarto over Hugo</h2>
+<p>As I mentioned, Hugo is an excellent tool for generating static sites, and I had just started a blog using Hugo a few weeks ago. However, I couldn’t find a way that meshed with my brain for dealing with computational content in Hugo, like Jupyter notebooks or python scripts. The <a href="https://quarto.org/docs/output-formats/hugo.html">solution</a> I found on Quarto’s website to including computational content in Hugo involves writing Quarto <code>.qmd</code> files and rendering them into Hugo <code>.md</code> files before running Hugo. This process works if you have a well-established Hugo blog, but since mine is relatively new, I decided to migrate wholesale to Quarto and have been happy with the move.</p>
+<p>Quarto’s strength is in its handling of computational content. For example, my recent <a href="../../blog/til/git-filter-repo/index.html">blog post on git-filter-repo</a> was written in a single <code>.qmd</code> file tied to a <code>bash</code> Jupyter kernel, and configuring it with Quarto was relatively painless. This style of computational writing seems to fit my brain a lot better, too.</p>
+<p>Some other noteworthy features I’ll mention quickly: Quarto also <a href="https://quarto.org/docs/projects/code-execution.html#overview">freezes</a> computational content, taking snapshots of computations that get checked into version control<sup>1</sup>. This speeds up the rendering process, and it ensures that you don’t have trouble building your website in <a href="https://www.youtube.com/watch?v=T8YCSJpF4g4">5 years time</a> when dependencies grow stale! Quarto has great editor support too, which is a nice bonus.</p>
+</section>
+<section id="quarto-resources" class="level2">
+<h2 class="anchored" data-anchor-id="quarto-resources">Quarto Resources</h2>
+<p>For a great intro on how to get started making a blog with Quarto, check out <a href="https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html">this blog post</a> from Albert Rapp – I followed it closely in making this blog. The <a href="https://quarto.org/docs/guide/">Quarto Documentation</a> is quite thorough as well. You can also check out the <a href="https://github.com/awray3/awray3.github.io">source code</a> to my blog to see how it’s set up.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>For comparison, Jupyter Book does something similar to this as well with <a href="https://jupyterbook.org/en/stable/content/execute.html">execution caching</a>.↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>Quarto</category>
+  <guid>https://awray3.github.io/blog/migrating-to-quarto/</guid>
+  <pubDate>Fri, 25 Nov 2022 08:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>How to Alter Git Histories</title>
+  <link>https://awray3.github.io/blog/til/git-filter-repo/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>I recently cleaned a couple of git repos that had large data files committed early in their history, and in the process I learned about <a href="https://github.com/newren/git-filter-repo">git-filter-repo</a>, a tool for cleanly altering git histories.</p>
+<p>There are many reasons you might need to modify your git history. For example, consider a local repo you want to push to Github that at some point in time had a file larger than <a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github">their 100MB cap</a> committed. In order to push to Github, you would need to not only remove the file from your repo with <code>git rm</code>, but also remove the file from <em>any commit</em> it showed up in. Another common scenario: you want to purge your git history of any accidentally tracked junk files, such as <code>__pycache__</code> folders or <code>.DS_Store</code> files.</p>
+<p>In both scenarios, the goal becomes to completely rid a file (or directory) from the git history.</p>
+<section id="the-old-way-git-filter-branch" class="level2">
+<h2 class="anchored" data-anchor-id="the-old-way-git-filter-branch">The old way: <code>git filter-branch</code></h2>
+<p>When you search around for ideas on how to rid files from histories you might find a lot of older stack-exchange posts and tutorial websites with solutions involving <code>git filter-branch</code>. However, according to the git filter-repo <a href="https://github.com/newren/git-filter-repo#why-filter-repo-instead-of-other-alternatives">readme</a>, <code>filter-branch</code> has numerous problems: it is slow, potentially unsafe for your repository, and clunky to use. For that reason I won’t describe how to use it here.</p>
+</section>
+<section id="enter-git-filter-repo" class="level2">
+<h2 class="anchored" data-anchor-id="enter-git-filter-repo">Enter <code>git filter-repo</code></h2>
+<p>People have since built simpler, more effective tools for performing git history manipulations, and the best one I’ve found is <a href="https://github.com/newren/git-filter-repo">git-filter-repo</a>. I picked it after having been convinced by their <a href="https://github.com/newren/git-filter-repo#why-filter-repo-instead-of-other-alternatives">comparisons to other tools</a> in this area. They cover many use cases in their <a href="https://htmlpreview.github.io/?https://github.com/newren/git-filter-repo/blob/docs/html/git-filter-repo.html">handbook</a>, which is worth at least glancing over.</p>
+</section>
+<section id="example-removing-files-from-the-git-history" class="level2">
+<h2 class="anchored" data-anchor-id="example-removing-files-from-the-git-history">Example: removing files from the git history</h2>
+<p>In this post I’ll focus on the example of removing a file from the git history. However, this works the same with directories and similarly with glob patterns or regex; see <code>--path-glob</code> and <code>--path-regex</code>.</p>
+<p>For illustration, I’ll initialize an empty git repository and add two files, <code>file_1.txt</code> and <code>file_2.txt</code>, in a single commit.</p>
+<div id="880bc8d0" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mkdir</span> /tmp/new-repo <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">&amp;&amp;</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">cd</span> /tmp/new-repo</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">git</span> init</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">touch</span> file_1.txt file_2.txt</span>
+<span id="cb1-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">git</span> add .</span>
+<span id="cb1-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">git</span> commit <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-m</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Initial commit"</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Initialized empty Git repository in /private/tmp/new-repo/.git/
+[main (root-commit) 4d23f8d] Initial commit
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 file_1.txt
+ create mode 100644 file_2.txt</code></pre>
+</div>
+</div>
+<div id="382618db" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">git</span> log <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--name-status</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--oneline</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-yellow-fg">4d23f8d</span><span class="ansi-yellow-fg"> (</span><span class="ansi-cyan-fg ansi-bold">HEAD</span><span class="ansi-yellow-fg"> -&gt; </span><span class="ansi-green-fg ansi-bold">main</span><span class="ansi-yellow-fg">)</span> Initial commit
+
+A   file_1.txt
+
+A   file_2.txt
+</pre>
+</div>
+</div>
+</div>
+<p>For this example our plan will be to delete <code>file_2.txt</code> from the git history <em>without</em> deleting <code>file_2.txt</code> itself.</p>
+<section id="step-1-decaching" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-decaching">Step 1: Decaching</h3>
+<p>“Decaching” is a word I made up for this step of “remove the file from the current git commit but keep it around in the folder.” You can do this with</p>
+<div id="49909c21" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">git</span> rm <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--cached</span> file_2.txt</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>rm 'file_2.txt'</code></pre>
+</div>
+</div>
+<p>Verify by checking that <code>ls</code> still shows both files, and that <code>git status</code> shows that <code>file_2.txt</code> is no longer tracked.</p>
+<div id="d03e9c9f" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ls</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>file_1.txt  file_2.txt</code></pre>
+</div>
+</div>
+<div id="64216fcf" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">git</span> status <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--short</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<div class="ansi-escaped-output">
+<pre><span style="opacity:0.7" class="ansi-white-fg">## </span><span class="ansi-green-fg">main</span>
+
+<span class="ansi-green-fg">D</span>  file_2.txt
+
+<span style="opacity:0.7" class="ansi-red-fg">??</span> file_2.txt
+</pre>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-filter-repo" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-filter-repo">Step 2: <code>filter-repo</code></h3>
+<p>With <code>file_2.txt</code> unstaged, apply <code>filter-repo</code> like this to delete <code>file_2.txt</code> from the history:</p>
+<div id="dc1f6fee" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;shellscript&quot;}}" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">git</span> filter-repo <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--path</span> file_2.txt <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--invert-paths</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--force</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Parsed 1 commits
+New history written in 0.02 seconds; now repacking/cleaning...
+Repacking your repo and cleaning out old unneeded objects
+HEAD is now at 9e2acce Initial commit
+Enumerating objects: 3, done.
+Counting objects:  33% (1/3)Counting objects:  66% (2/3)Counting objects: 100% (3/3)Counting objects: 100% (3/3), done.
+Writing objects:  33% (1/3)Writing objects:  66% (2/3)Writing objects: 100% (3/3)Writing objects: 100% (3/3), done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Completely finished after 0.07 seconds.</code></pre>
+</div>
+</div>
+<p>The <code>--path</code> specifies the path you’re trying to target for removal, and the <code>--invert-paths</code> is basically the logical negation of the filtering condition, so when it’s applied it will <em>only delete</em> <code>file_2.txt</code>. When you leave that flag off, you instead <em>delete everything except</em> <code>file_2.txt</code>. You get only the file, or everything but the file.</p>
+<p>The <code>--force</code> flag is needed because <code>filter-repo</code> expects us to follow best practices by only using it on a fresh clone. In practice<sup>1</sup>, you would commit all your work, get a clean git state, and make a fresh clone of your repo to operate on with <code>filter-repo</code>.</p>
+<p>Now check the files in the git log and filesystem:</p>
+<div id="3de956e7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;shellscript&quot;}}" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ls</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>file_1.txt  file_2.txt</code></pre>
+</div>
+</div>
+<div id="36dfbd5a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;shellscript&quot;}}" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">git</span> log <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--name-status</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--oneline</span>                         </span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-yellow-fg">9e2acce</span><span class="ansi-yellow-fg"> (</span><span class="ansi-cyan-fg ansi-bold">HEAD</span><span class="ansi-yellow-fg"> -&gt; </span><span class="ansi-green-fg ansi-bold">main</span><span class="ansi-yellow-fg">)</span> Initial commit
+
+A   file_1.txt
+</pre>
+</div>
+</div>
+</div>
+<p>The single commit now does not have any information pertaining to <code>file_2.txt</code>, and <code>file_2.txt</code> is still around on the filesystem. (If you just wanted to delete it completely, you could just skip the decaching step altogether.)</p>
+<p>That’s all there is to it!</p>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>See <a href="https://htmlpreview.github.io/?https://github.com/newren/git-filter-repo/blob/docs/html/git-filter-repo.html#FRESHCLONE">this part of the handbook</a>↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>git</category>
+  <category>TIL</category>
+  <guid>https://awray3.github.io/blog/til/git-filter-repo/</guid>
+  <pubDate>Sat, 12 Nov 2022 08:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Welcome to My Blog</title>
+  <link>https://awray3.github.io/blog/welcome/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Welcome to my blog! I’m new to writing blog posts, and I’m glad you’re here to enjoy it with me. This is a place for me to write down my thoughts on topics that interest me, including mathematics, physics, data science, machine learning, music, or whatever topic piques my interest.</p>
+
+
+
+ ]]></description>
+  <category>news</category>
+  <guid>https://awray3.github.io/blog/welcome/</guid>
+  <pubDate>Sun, 14 Nov 2021 08:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
