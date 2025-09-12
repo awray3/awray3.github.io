@@ -4,42 +4,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "Migrating my blog from Hugo to Quarto\n\n\n\nQuarto\n\n\n\n\n\n\n\n\n\nNov 25, 2022\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Alter Git Histories\n\n\n\ngit\n\nTIL\n\n\n\nRemove files from your git history with git-filter-repo\n\n\n\n\n\nNov 12, 2022\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to My Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nNov 14, 2021\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "blog/welcome/index.html",
-    "href": "blog/welcome/index.html",
-    "title": "Welcome to My Blog",
-    "section": "",
-    "text": "Welcome to my blog! I’m new to writing blog posts, and I’m glad you’re here to enjoy it with me. This is a place for me to write down my thoughts on topics that interest me, including mathematics, physics, data science, machine learning, music, or whatever topic piques my interest."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Andrew Wray",
-    "section": "",
-    "text": "I’m Andrew Wray, and I am a data scientist and mathematician based in Seattle, WA.\nI received my Bachelor’s of Science in Math and Physics at Western Washington University in 2014, where I was recognized as WWU Math Department’s Outstanding Graduate. I completed my PhD in Algebraic Geometry at the University of Oregon in June 2020 under the guidance of Nick Addington. These days I work as a data scientist for Fullpower Technologies developing and enhancing AI-based algorithms for Sleeptracker.\nIf you wish to get in contact with me, feel free to send me an email (andrew.wray2718 at gmail dot com) or reach out on LinkedIn."
-  },
-  {
-    "objectID": "research.html",
-    "href": "research.html",
-    "title": "Research",
-    "section": "",
-    "text": "Moduli Spaces of Twisted Hermite-Einstein Connections on K3 Surfaces. My PhD thesis under the supervision of Nick Addington.\nTwisted Fourier-Mukai partners of Enriques surfaces. With Nick Addington. Appears in Math. Z. 297, 2021. (Arxiv Link)"
-  },
-  {
-    "objectID": "research.html#in-mathematics",
-    "href": "research.html#in-mathematics",
-    "title": "Research",
-    "section": "",
-    "text": "Moduli Spaces of Twisted Hermite-Einstein Connections on K3 Surfaces. My PhD thesis under the supervision of Nick Addington.\nTwisted Fourier-Mukai partners of Enriques surfaces. With Nick Addington. Appears in Math. Z. 297, 2021. (Arxiv Link)"
-  },
-  {
-    "objectID": "research.html#in-physics",
-    "href": "research.html#in-physics",
-    "title": "Research",
-    "section": "In Physics",
-    "text": "In Physics\n\nHyperspherical approach to a three-boson problem in two dimensions with a magnetic field. With Seth Rittenhouse and B.L. Johnson. Appears in Phys. Rev. A 93, 2016."
+    "text": "Migrating my blog from Hugo to Quarto\n\n\n\nQuarto\n\n\n\n\n\n\n\n\n\nNov 25, 2022\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Alter Git Histories\n\n\n\ngit\n\nTIL\n\n\n\nRemove files from your git history with git-filter-repo\n\n\n\n\n\nNov 12, 2022\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "blog/migrating-to-quarto/index.html",
@@ -75,6 +40,34 @@
     "title": "Migrating my blog from Hugo to Quarto",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nFor comparison, Jupyter Book does something similar to this as well with execution caching.↩︎"
+  },
+  {
+    "objectID": "research.html",
+    "href": "research.html",
+    "title": "Research",
+    "section": "",
+    "text": "Moduli Spaces of Twisted Hermite-Einstein Connections on K3 Surfaces. My PhD thesis under the supervision of Nick Addington.\nTwisted Fourier-Mukai partners of Enriques surfaces. With Nick Addington. Appears in Math. Z. 297, 2021. (Arxiv Link)"
+  },
+  {
+    "objectID": "research.html#in-mathematics",
+    "href": "research.html#in-mathematics",
+    "title": "Research",
+    "section": "",
+    "text": "Moduli Spaces of Twisted Hermite-Einstein Connections on K3 Surfaces. My PhD thesis under the supervision of Nick Addington.\nTwisted Fourier-Mukai partners of Enriques surfaces. With Nick Addington. Appears in Math. Z. 297, 2021. (Arxiv Link)"
+  },
+  {
+    "objectID": "research.html#in-physics",
+    "href": "research.html#in-physics",
+    "title": "Research",
+    "section": "In Physics",
+    "text": "In Physics\n\nHyperspherical approach to a three-boson problem in two dimensions with a magnetic field. With Seth Rittenhouse and B.L. Johnson. Appears in Phys. Rev. A 93, 2016."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Andrew Wray",
+    "section": "",
+    "text": "I’m Andrew Wray, and I am a data scientist and mathematician based in Seattle, WA.\nI received my Bachelor’s of Science in Math and Physics at Western Washington University in 2014, where I was recognized as WWU Math Department’s Outstanding Graduate. I completed my PhD in Algebraic Geometry at the University of Oregon in June 2020 under the guidance of Nick Addington. These days I work as a data scientist for Fullpower Technologies developing and enhancing AI-based algorithms for Sleeptracker.\nIf you wish to get in contact with me, feel free to send me an email (andrew.wray2718 at gmail dot com) or reach out on LinkedIn."
   },
   {
     "objectID": "blog/til/git-filter-repo/index.html",

@@ -3,8 +3,7 @@
     "listing": "/blog.html",
     "items": [
       "/blog/migrating-to-quarto/index.html",
-      "/blog/til/git-filter-repo/index.html",
-      "/blog/welcome/index.html"
+      "/blog/til/git-filter-repo/index.html"
     ]
   }
 ]
