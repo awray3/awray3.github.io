@@ -1,0 +1,8 @@
+{
+    "files.exclude": {
+        "_freeze": true,
+        "_site": true,
+        ".quarto": true,
+        "posts": true
+    }
+}

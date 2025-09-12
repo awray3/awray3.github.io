@@ -1,0 +1,15 @@
+---
+title: "Compu-Journal"
+description: Sub-blog on more technical aspects of computation and mathematics
+listing:
+  contents: compu-journal
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: false
+  feed: true
+page-layout: full
+title-block-banner: false
+comments: false
+---

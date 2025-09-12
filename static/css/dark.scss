@@ -1,0 +1,31 @@
+/*-- scss:defaults --*/
+// this is where sass variables go
+$h2-font-size: 1.6rem !default;
+$headings-font-weight: 500 !default;
+$link-color: #61afef;
+$font-size-root: 14pt;
+
+// code blocks
+$code-block-border-left: true;
+$code-block-bg: #31363c;
+$code-block-bg-alpha: 0.5;
+
+/*-- scss:rules --*/
+// this is where normal css goes
+code, p code:not(.sourceCode) {
+    color: #8fb5d6;
+    background-color: #3e444a;
+}
+
+
+// These two blocks essentially make the output code look
+// more like a terminal output.
+div.cell {
+    border-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+div.cell-output.cell-output-stdout pre:nth-child(1) {
+    margin-bottom: -5px;
+    opacity: 50%;
+}
