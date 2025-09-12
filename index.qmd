@@ -11,8 +11,6 @@ about:
       href: https://github.com/awray3
     - icon: envelope
       href: mailto:aaawray@proton.me
-    - icon: mastodon
-      href: https://fosstodon.org/@awray
     - icon: cup
       href: https://www.buymeacoffee.com/awray
 ---
@@ -26,8 +24,8 @@ under the guidance of [Nick Addington](nick_webpage).
 These days I work as a data scientist for [Fullpower Technologies][fullpower]
 developing and enhancing AI-based algorithms for [Sleeptracker][sleeptracker].
 
-If you wish to get in contact with me, feel free to send me an [email][contact] 
-or reach out on <a rel="me" href="https://fosstodon.org/@awray">Mastodon</a>!
+If you wish to get in contact with me, feel free to send me an [email][contact]
+or reach out on LinkedIn.
 
 [nick_webpage]: https://pages.uoregon.edu/adding/
 [fullpower]: https://www.fullpower.com/
