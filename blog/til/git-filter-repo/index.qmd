@@ -6,6 +6,9 @@ categories:
   - git
   - TIL
 description: Remove files from your git history with `git-filter-repo`
+jupyter: bash
+execute:
+  freeze: true
 ---
 
 I recently cleaned a couple of git repos that had large data files committed
@@ -55,14 +58,12 @@ For illustration, I'll initialize an empty git repository and add two files,
 ```{bash}
 #| results: hide
 #| echo: false
-#| vscode: {languageId: shellscript}
 
 # make sure the location is clean 
 rm -rf /tmp/new-repo
 ```
 
 ```{bash}
-#| vscode: {languageId: shellscript}
 mkdir /tmp/new-repo && cd /tmp/new-repo
 git init
 touch file_1.txt file_2.txt
@@ -72,7 +73,6 @@ git commit -m "Initial commit"
 
 
 ```{bash}
-#| vscode: {languageId: shellscript}
 git log --name-status --oneline
 ```
 
@@ -85,7 +85,6 @@ _without_ deleting `file_2.txt` itself.
 current git commit but keep it around in the folder." You can do this with
 
 ```{bash}
-#| vscode: {languageId: shellscript}
 git rm --cached file_2.txt
 ```
 
@@ -93,12 +92,10 @@ Verify by checking that `ls` still shows both files, and that `git status` shows
 that `file_2.txt` is no longer tracked.
 
 ```{bash}
-#| vscode: {languageId: shellscript}
 ls
 ```
 
 ```{bash}
-#| vscode: {languageId: shellscript}
 git status --short
 ```
 
