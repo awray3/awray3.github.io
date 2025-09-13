@@ -1,0 +1,20 @@
+\documentclass[tikz,border=2pt]{standalone}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usetikzlibrary{calc}
+
+\begin{document}
+\begin{tikzpicture}[color=white]
+	\node[above left] at (0, 6) {$X$};
+	\draw[thick] (0,0) rectangle (6,6);
+
+	\foreach \lbl/\word [count=\i] in {$x_1$/The, $x_2$/quick, $x_3$/brown, $\vdots$, $x_p$/fox, $\vdots$} {
+			\draw (0, {(\i-1)}) rectangle (6,\i);
+			\node (N\i) at (3, 6 - \i + 0.5) {\lbl};
+			\node (W\i) at (-1.5, 6 - \i + 0.5) {\word};
+		}
+
+	\draw[->] (0.5, 6.25) -- node[above] {$I$} (3, 6.25);
+	\draw[->] (-0.25, 5.5) -- node[left] {$S$} (-0.25, 3);
+\end{tikzpicture}
+\end{document}

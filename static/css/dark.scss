@@ -10,9 +10,11 @@ $code-block-border-left: true;
 $code-block-bg: #31363c;
 $code-block-bg-alpha: 0.5;
 
+$body-color: #adb5bd;
+
 /*-- scss:rules --*/
 // this is where normal css goes
-code, p code:not(.sourceCode) {
+code, :is(ul li, p) code:not(.sourceCode) {
     color: #8fb5d6;
     background-color: #3e444a;
 }
