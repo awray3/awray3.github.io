@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/blog/attention/index.html",
       "/blog/til/git-filter-repo/index.html"
     ]
   }

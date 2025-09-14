@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.34">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2025-09-13">
+<meta name="description" content="An explanation of the Multi-Head Attention layer.">
+
+<title>Multi-Head Attention – Andrew Wray</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../static/img/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-f0a4794d096e7901d871e43f74665444.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-d6b801944228a7c6a83b4511edd1acc9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Multi-Head Attention – Andrew Wray">
+<meta property="og:description" content="An explanation of the Multi-Head Attention layer.">
+<meta property="og:image" content="https://awray3.github.io/blog/attention/figures/figure-1.png">
+<meta property="og:site_name" content="Andrew Wray's Blog">
+<meta property="og:image:height" content="2440">
+<meta property="og:image:width" content="2922">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Andrew Wray</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../research.html"> 
+<span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/awray3"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../blog.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#one-attention-head" id="toc-one-attention-head" class="nav-link active" data-scroll-target="#one-attention-head">One attention head</a>
+  <ul class="collapse">
+  <li><a href="#attention-scores" id="toc-attention-scores" class="nav-link" data-scroll-target="#attention-scores">Attention Scores</a></li>
+  </ul></li>
+  <li><a href="#multiple-heads" id="toc-multiple-heads" class="nav-link" data-scroll-target="#multiple-heads">Multiple Heads</a></li>
+  <li><a href="#positional-encodings" id="toc-positional-encodings" class="nav-link" data-scroll-target="#positional-encodings">Positional Encodings</a>
+  <ul class="collapse">
+  <li><a href="#fixed-vecors" id="toc-fixed-vecors" class="nav-link" data-scroll-target="#fixed-vecors">Fixed Vecors</a></li>
+  <li><a href="#rotational-encodings" id="toc-rotational-encodings" class="nav-link" data-scroll-target="#rotational-encodings">Rotational Encodings</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Multi-Head Attention</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">transformers</div>
+    <div class="quarto-category">machine-learning</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    An explanation of the Multi-Head Attention layer.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 13, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>In this blog post I will give my explanation of the multi-head attention mechanism, which is the core ingredient for the transformer architecture which underpins the latest large-language models (LLMs) such as chatGPT and Claude.</p>
+<p>The multi-head attention layer is parameterized by</p>
+<ul>
+<li>the <em>sequence_length</em> <span class="math inline">\(S\)</span>;</li>
+<li>the <em>input length</em> <span class="math inline">\(I\)</span>, the dimensionality of the input data/signal;</li>
+<li>the <em>output length</em> <span class="math inline">\(\mathcal{O}\)</span>, the dimensionality of the output data/signal;</li>
+<li>the <em>model dimension</em> <span class="math inline">\(D\)</span>, an internal dimensionality parameter; and</li>
+<li>the number of heads <span class="math inline">\(N\)</span>.</li>
+</ul>
+<section id="one-attention-head" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="one-attention-head">One attention head</h2>
+<p>Let’s start with the case of one attention head. The generalization to multiple heads will be straightforward after this.</p>
+<p>The attention layer in this case is a function</p>
+<p><span class="math display">\[
+\operatorname{Attention}_{S, I, \mathcal{O}, D}: \mathbb{R}^{(S, I)} \to \mathbb{R}^{(S, \mathcal{O})}
+\]</span></p>
+<p>where <span class="math inline">\(\mathbb{R}^{(S, I)}\)</span> is the vector space of arrays of shape <span class="math inline">\((S, I)\)</span>. This says that the input to attention is an array <span class="math inline">\(X\)</span> of shape <span class="math inline">\((S, I)\)</span> and the output is an array of shape <span class="math inline">\((S, \mathcal{O})\)</span>.</p>
+<p>The <span class="math inline">\(S\)</span> axis can be thought of in various ways. When used in a language model, the <span class="math inline">\(S\)</span> axis corresponds to position along a text input; in a time series model the <span class="math inline">\(S\)</span> axis is the time axis.</p>
+<p>The <span class="math inline">\(I\)</span> axis represents the input features or channels. In a language model, each word in some input text gets mapped to an embedding vector of dimension <span class="math inline">\(I\)</span>, which is nicely explained in <a href="https://www.youtube.com/watch?v=wjZofJX0v4M&amp;t=747s">this 3Blue1Brown video</a>. In a time series model, you might have several different signals that are measured at each point in time, and the positions along the <span class="math inline">\(I\)</span> axis represent those different signals.</p>
+<p>An input array <span class="math inline">\(X \in \mathbb{R}^{(S, I)}\)</span> can thus be thought of as a sequence of <span class="math inline">\(I\)</span>-dimensional vectors <span class="math inline">\((x_p)\)</span> indexed by the sequence axis <span class="math inline">\(S\)</span>. With this convention, the <span class="math inline">\(S\)</span>-axis goes along the rows and the <span class="math inline">\(I\)</span>-dimensional vectors are row vectors.</p>
+<div id="fig-input" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-input-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/figure-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-input-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Attention input tensor of shape <span class="math inline">\((S, I)\)</span>
+</figcaption>
+</figure>
+</div>
+<p>The formula for attention is</p>
+<p><span id="eq-attn"><span class="math display">\[
+\begin{align}
+\operatorname{Attention}(X) &amp;=
+  \operatorname{softmax}\bigg(
+    \frac{1}{\sqrt{D}}
+    QK^T
+  \bigg) V
+\end{align}
+\tag{1}\]</span></span></p>
+<p>where <span class="math inline">\(Q, K, V\)</span> are called <em>queries</em>, <em>keys</em>, and <em>values</em> respectively. These matrices are defined as</p>
+<p><span id="eq-qkv"><span class="math display">\[
+\begin{align}
+  Q &amp;= XW_Q + b_Q \\
+  K &amp;= XW_K + b_K \\
+  V &amp;= XW_V + b_V
+\end{align}
+\tag{2}\]</span></span></p>
+<p>The above formulas use matrix multiplication and the sum of the bias vector is broadcasted across the sequence axis. By matrix multiplication we can write this as an equation on the rows of <span class="math inline">\(Q\)</span>, <span class="math inline">\(K\)</span>, and <span class="math inline">\(V\)</span>. For example, for the rows <span class="math inline">\((q_p)\)</span> of <span class="math inline">\(Q\)</span> we have</p>
+<p><span id="eq-queries"><span class="math display">\[q_p = x_p W_Q + b_Q \tag{3}\]</span></span></p>
+<p>(and similarly for rows <span class="math inline">\((k_p)\)</span> of <span class="math inline">\(K\)</span> and <span class="math inline">\((v_p)\)</span> of <span class="math inline">\(V\)</span>). If this equation looks a little strange it’s because it’s an equation on <em>row</em> vectors, whereby matrices act on the right instead of the left. A consequence of this is that the feature rows of <span class="math inline">\(Q, K, V\)</span> are completely localized to their position in the sequence dimension; they do not contain information from other locations along the input sequence.</p>
+<p>The shapes of these arrays are summarized in the following table. Note that <span class="math inline">\(Q\)</span>, <span class="math inline">\(K\)</span>, and <span class="math inline">\(V\)</span> can be visualized similarly to <span class="math inline">\(X\)</span> as in <a href="#fig-input" class="quarto-xref">Figure&nbsp;1</a> as sequences of vectors along the <span class="math inline">\(S\)</span>-axis.</p>
+<div style="width:30%; margin:0 auto;">
+<div class="table-responsive">
+<table class="table-striped table-hover table-sm small caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Array</th>
+<th style="text-align: center;">Shape</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(W_Q\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((I, D)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(W_K\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((I, D)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(W_V\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((I, \mathcal{O})\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(Q\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((S, D)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(K\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((S, D)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(V\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((S, \mathcal{O})\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Each of the weights <span class="math inline">\((W, b)\)</span> are free parameters of the layer that are learned during model training.</p>
+<section id="attention-scores" class="level3">
+<h3 class="anchored" data-anchor-id="attention-scores">Attention Scores</h3>
+<p>The next step towards <a href="#eq-attn" class="quarto-xref">Equation&nbsp;1</a> is the computation of the <em>attention scores</em>, which are given by the matrix</p>
+<p><span id="eq-attn-matrix"><span class="math display">\[
+A = \operatorname{softmax}\bigg(
+  \frac{1}{\sqrt{D}}
+  QK^T
+\bigg)
+\tag{4}\]</span></span></p>
+<p>appearing in <a href="#eq-attn" class="quarto-xref">Equation&nbsp;1</a>. Starting from the inside, the matrix <span class="math inline">\(QK^T\)</span> is the matrix of dot-products between all query vectors and all key vectors.</p>
+<p><span class="math display">\[
+Q K^T =
+\begin{pmatrix}
+\textemdash q_1 \textemdash \\
+\textemdash q_2 \textemdash \\
+\textemdash q_3 \textemdash \\
+\vdots
+\end{pmatrix}
+\begin{pmatrix}
+     |&amp;     | &amp;     | &amp; \\
+k_1^T &amp; k_2^T &amp; k_3^T &amp; \cdots \\
+     |&amp;     | &amp;     | &amp; \\
+\end{pmatrix} =
+\begin{pmatrix}
+q_1k_1^T &amp; q_1k_2^T &amp; \cdots &amp; &amp;\\
+q_2k_1^T &amp; q_2k_2^T &amp; \cdots &amp; &amp; \\
+\vdots   &amp; \vdots   &amp; \ddots &amp; &amp; \\
+         &amp;          &amp;        &amp; q_ik_j^T &amp; \\
+         &amp;          &amp;        &amp;          &amp; \ddots \\
+\end{pmatrix}
+\in \mathbb{R}^{(S, S)}
+\]</span></p>
+<p>A dot product <span class="math inline">\(q_ik_j^T\)</span> will be small when the query and key columns are very different, and large when the they are nearly parallel. For this reason you can think of the queries as retrieving information by “looking up” the keys using dot products. When the query aligns with the key, that key gets selected, and we might say that position <span class="math inline">\(i\)</span> <em>attends to</em> position <span class="math inline">\(j\)</span>.</p>
+<p>We can start to see that the attention mechanism is like a fuzzy dictionary. A query <span class="math inline">\(q_i\)</span> at position <span class="math inline">\(i\)</span> in the sequence “looks” at all keys <span class="math inline">\(k_j\)</span> along the sequence by taking the dot product with them. When that has high alignment, the associated value <span class="math inline">\(v_j\)</span> to <span class="math inline">\(k_j\)</span> will then contribute to the final output of the attention layer at position <span class="math inline">\(i\)</span>.</p>
+<p>To understand the fuzzy part, we must continue digesting <a href="#eq-attn-matrix" class="quarto-xref">Equation&nbsp;4</a>. I’ll come back to the <span class="math inline">\(\sqrt{D}\)</span> in a moment, so let’s understand what’s going on with the softmax.</p>
+<p>If we didn’t have the softmax around, attention would output <span class="math inline">\(AV= QK^T V\)</span>:</p>
+<p><span class="math display">\[
+\begin{align*}
+QK^T V &amp;= \begin{pmatrix}
+q_1k_1^T &amp; q_1k_2^T &amp; \cdots &amp; &amp;\\
+q_2k_1^T &amp; q_2k_2^T &amp; \cdots &amp; &amp; \\
+\vdots   &amp; \vdots   &amp; \ddots &amp; &amp; \\
+         &amp;          &amp;        &amp; q_ik_j^T &amp; \\
+         &amp;          &amp;        &amp;          &amp; \ddots \\
+\end{pmatrix}
+\begin{pmatrix}
+  \textemdash v_1 \textemdash \\
+  \textemdash v_2 \textemdash \\
+  \vdots\\
+  \textemdash v_j \textemdash \\
+  \vdots
+\end{pmatrix} \\
+&amp;= \begin{pmatrix}
+  (q_1k_1^T)v_1 + (q_1k_2^T)v_2 + \cdots + (q_1k_S^T)v_S \\
+  (q_2k_1^T)v_1 + (q_2k_2^T)v_2 + \cdots + (q_2k_S^T)v_S \\
+  \cdots\\
+  (q_ik_1^T)v_1 + (q_ik_2^T)v_2 + \cdots + (q_ik_S^T)v_S \\
+  \cdots
+\end{pmatrix} \overset{\text{def}}{=}
+\begin{pmatrix}
+  \textemdash o_1 \textemdash \\
+  \textemdash o_2 \textemdash \\
+  \cdots \\
+  \textemdash o_i \textemdash \\
+  \cdots
+\end{pmatrix}
+\end{align*}
+\]</span></p>
+<p>The result<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> is a little messy, but it shows what is meant by “fuzzy”: the output vector <span class="math inline">\(o_i\)</span> at position <span class="math inline">\(i\)</span> in the sequence is a linear combination of the value vectors, and each value <span class="math inline">\(v_j\)</span> contributes by an amount proportional to the lookup weights <span class="math inline">\(q_ik_j^T\)</span>.</p>
+<p>Adding the softmax and factor of <span class="math inline">\(\sqrt{D}\)</span> back in doesn’t alter this core idea. The <a href="https://en.wikipedia.org/wiki/Softmax_function">softmax</a> in <a href="#eq-attn-scores" class="quarto-xref">Equation&nbsp;5</a> is applied over the rows of <span class="math inline">\(QK^T\)</span>, so it converts the set of lookup weights for each output to a probability distribution:</p>
+<p><span class="math display">\[
+\operatorname{softmax}(q_ik_1^T/\sqrt{D}, q_ik_2^T/\sqrt{D}, \dots, q_ik_S^T/\sqrt{D})
+  \mapsto (a_{i,1}, a_{i, 2}, \dots, a_{i, S})
+\]</span></p>
+<p>where</p>
+<p><span id="eq-attn-scores"><span class="math display">\[
+\begin{align}
+  a_{i, j} = \frac{\exp(q_ik_j^T/\sqrt{D})}{\sum_{l} \exp(q_ik_l^T/\sqrt{D})}.
+\end{align}
+\tag{5}\]</span></span></p>
+<p>are the <em>attention scores</em>. The output array’s <span class="math inline">\(i^{\text{th}}\)</span> row still looks like a linear combination of value vectors:</p>
+<p><span id="eq-attn-output"><span class="math display">\[
+  o_i = a_{i, 1}v_1 + a_{i, 2}v_2 + \dots a_{i, S}v_S.
+\tag{6}\]</span></span></p>
+<p>Now, it’s not the lookup weight <span class="math inline">\(q_ik_j^T\)</span> but rather a scaled version<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> of its exponential in <a href="#eq-attn-scores" class="quarto-xref">Equation&nbsp;5</a> that tells us how much <span class="math inline">\(v_j\)</span> contributes to <span class="math inline">\(o_i\)</span>. We get a maximal contribution when <span class="math inline">\(q_i\)</span> is parallel to <span class="math inline">\(k_j\)</span>, and a minimal contribution when they are anti-parallel.</p>
+<section id="normalizing-factor-sqrtd" class="level4">
+<h4 class="anchored" data-anchor-id="normalizing-factor-sqrtd">Normalizing Factor <span class="math inline">\(\sqrt{D}\)</span></h4>
+<p>The normalizing factor of <span class="math inline">\(\sqrt{D}\)</span> in these equations is to make sure that the softmax operation doesn’t become oversaturated. Roughly what happens is the lookup weights <span class="math inline">\(q_ik_j^T\)</span> have a variance equal to <span class="math inline">\(D\)</span>, so you can expect that several of them are much larger than others. Due to the exponentials in the definition of softmax in <a href="#eq-attn-scores" class="quarto-xref">Equation&nbsp;5</a>, these much larger values dominate the softmax and most other weights are near <span class="math inline">\(0\)</span>. Scaling by <span class="math inline">\(\sqrt{D}\)</span> brings the variance down to 1, and that ensures that it is unlikely for one particular lookup weight to dominate.</p>
+<p>For more details, see <a href="https://ai.stackexchange.com/a/42197">this great stackexchange answer</a>.</p>
+</section>
+</section>
+</section>
+<section id="multiple-heads" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-heads">Multiple Heads</h2>
+<p>Generalizing to multiple heads is straightforward: if <span class="math inline">\(N\)</span> is the number of heads, you chop up the model dimension <span class="math inline">\(D\)</span> into <span class="math inline">\(N\)</span> bins and apply the attention formula <a href="#eq-attn" class="quarto-xref">Equation&nbsp;1</a> <span class="math inline">\(N\)</span> times, using <span class="math inline">\(D_{head} = D / N\)</span> in place of <span class="math inline">\(D\)</span> and <span class="math inline">\(\mathcal{O}_{head} = \mathcal{O} / N\)</span> in place of <span class="math inline">\(\mathcal{O}\)</span>.</p>
+<p>For each <span class="math inline">\(n = 1, 2, \dots, N\)</span>, the <span class="math inline">\(n\)</span>th attention head outputs an array of shape <span class="math inline">\((S, \mathcal{O}_{head})\)</span> whose rows are <span class="math inline">\(o_i^{(n)}\)</span>. Each of the <span class="math inline">\(o_i^{(n)}\)</span> have the same mathematical form as <a href="#eq-attn-output" class="quarto-xref">Equation&nbsp;6</a>, except all the row vectors <span class="math inline">\(q, k, v\)</span> of each matrix have reduced length (which means <span class="math inline">\(o_i^{(n)}\)</span> also has reduced length because it’s a sum of <span class="math inline">\(v\)</span>’s). They then fit together to form the final output vector <span class="math inline">\(o_i\)</span>:</p>
+<p><span id="eq-attn-multi-output"><span class="math display">\[
+o_i = \begin{pmatrix}
+  o_i^{(1)} &amp; \bigg| &amp; o_i^{(2)} &amp; \bigg| &amp; \cdots &amp; \bigg| &amp; o_{i}^{(N)}
+\end{pmatrix}
+\tag{7}\]</span></span></p>
+<p>When allowing for more heads, we are deciding that our output features are grouped into sub-outputs, each of which has an attention head behind it. These different groups are then free to learn about different features of the input array <span class="math inline">\(X\)</span>. This is similar to how a convolutional layer with multiple features can learn to pick out distinct components of the input signal.</p>
+</section>
+<section id="positional-encodings" class="level2">
+<h2 class="anchored" data-anchor-id="positional-encodings">Positional Encodings</h2>
+<p>So at this point we’ve fully defined the attention layer; the output array has rows <span class="math inline">\(o_i\)</span> given by <a href="#eq-attn-output" class="quarto-xref">Equation&nbsp;6</a> (or <a href="#eq-attn-multi-output" class="quarto-xref">Equation&nbsp;7</a> when multiple heads are used).</p>
+<p>However, everything that goes into the attention scores <span class="math inline">\(a_{i,j}\)</span> is purely based on the values <em>at</em> each position, but it does not make use of the relative position of each query and key. Basically, we’re only looking at how values at <span class="math inline">\(i\)</span> compare to values at <span class="math inline">\(j\)</span>, but we haven’t actually included information about how <em>close</em> <span class="math inline">\(i\)</span> is to <span class="math inline">\(j\)</span>.</p>
+<p>To illustrate this a bit a further, consider the following sentence.</p>
+<blockquote class="blockquote">
+<p>They decided to park the car in the park.</p>
+</blockquote>
+<p>By our construction, queries will attend to the word “park” at both occurrences with equal attention, because both “park”s will have the same key and value vectors. The missing context is how far apart the words are; a good model would probably learn to attend differently to the same word at different locations in the sentence.</p>
+<p>One solution is to add positional encoding to the sequence at some point before we calculate attention scores. I’ll briefly mention two methods in this post: fixed vector encodings and rotational encodings. There are many variants of these out there, and these two are relatively common.</p>
+<section id="fixed-vecors" class="level3">
+<h3 class="anchored" data-anchor-id="fixed-vecors">Fixed Vecors</h3>
+<p>The easiest way to add positional encoding is to add on a fixed vector at each point along the sequence. We take vectors <span class="math inline">\(\epsilon_1, \epsilon_2, \dots, \epsilon_S
+\in \mathbb{R}^I\)</span> and use <span class="math inline">\(x_p + \epsilon_p\)</span> instead of x_p$ in <a href="#eq-queries" class="quarto-xref">Equation&nbsp;3</a>, and allow these vectors to be learnable parameters during training. This was the strategy used in the <a href="https://arxiv.org/abs/1706.03762">original paper</a>. The method is pretty simple, but it turns out to not lead to the best results.</p>
+<p>This method also lacks translation invariance. The transformer only knows to distinguish positions based on the raw values of the <span class="math inline">\(\epsilon_i\)</span>, and if you were to shift your input sequence you might get different results due to the shifted input matching up with different <span class="math inline">\(epsilon_i\)</span>.</p>
+</section>
+<section id="rotational-encodings" class="level3">
+<h3 class="anchored" data-anchor-id="rotational-encodings">Rotational Encodings</h3>
+<p>A more sophisticated approach appearing the <a href="https://arxiv.org/abs/2104.09864">Roformer</a> paper involves rotating the queries <span class="math inline">\(Q\)</span> and keys <span class="math inline">\(K\)</span> by rotations <span class="math inline">\(R_1, R_2, ..., R_S\)</span> such that any neighboring rotations differ by the same angle <span class="math inline">\(\theta\)</span>. This breaks the symmetry we observed above, and moreover it is less sensitive to translations, because the <em>relative</em> rotation is preserved along the sequence. This paper has shown this to be a more effective method of positional encoding than the fixed vector approach.</p>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Note that in general, you cannot turn the parentheses around to write <span class="math inline">\(o_i = q_i(k_1^Tv_1 + \cdots + k_S^Tv_S)\)</span>, because unless <span class="math inline">\(D =
+\mathcal{O}\)</span>, the dot product <span class="math inline">\(k_j^T v_j\)</span> does not make sense.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Note that the denominator of the softmax values <span class="math inline">\(a_{i,j}\)</span> is the same for all <span class="math inline">\(j\)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/awray3\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

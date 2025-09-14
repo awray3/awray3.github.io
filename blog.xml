@@ -10,7 +10,159 @@
 <atom:link href="https://awray3.github.io/blog.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website and blog of Andrew Wray</description>
 <generator>quarto-1.7.34</generator>
-<lastBuildDate>Sat, 12 Nov 2022 08:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 13 Sep 2025 07:00:00 GMT</lastBuildDate>
+<item>
+  <title>Multi-Head Attention</title>
+  <link>https://awray3.github.io/blog/attention/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>In this blog post I will give my explanation of the multi-head attention mechanism, which is the core ingredient for the transformer architecture which underpins the latest large-language models (LLMs) such as chatGPT and Claude.</p>
+<p>The multi-head attention layer is parameterized by</p>
+<ul>
+<li>the <em>sequence_length</em> <img src="https://latex.codecogs.com/png.latex?S">;</li>
+<li>the <em>input length</em> <img src="https://latex.codecogs.com/png.latex?I">, the dimensionality of the input data/signal;</li>
+<li>the <em>output length</em> <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BO%7D">, the dimensionality of the output data/signal;</li>
+<li>the <em>model dimension</em> <img src="https://latex.codecogs.com/png.latex?D">, an internal dimensionality parameter; and</li>
+<li>the number of heads <img src="https://latex.codecogs.com/png.latex?N">.</li>
+</ul>
+<section id="one-attention-head" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="one-attention-head">One attention head</h2>
+<p>Let’s start with the case of one attention head. The generalization to multiple heads will be straightforward after this.</p>
+<p>The attention layer in this case is a function</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Coperatorname%7BAttention%7D_%7BS,%20I,%20%5Cmathcal%7BO%7D,%20D%7D:%20%5Cmathbb%7BR%7D%5E%7B(S,%20I)%7D%20%5Cto%20%5Cmathbb%7BR%7D%5E%7B(S,%20%5Cmathcal%7BO%7D)%7D%0A"></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BR%7D%5E%7B(S,%20I)%7D"> is the vector space of arrays of shape <img src="https://latex.codecogs.com/png.latex?(S,%20I)">. This says that the input to attention is an array <img src="https://latex.codecogs.com/png.latex?X"> of shape <img src="https://latex.codecogs.com/png.latex?(S,%20I)"> and the output is an array of shape <img src="https://latex.codecogs.com/png.latex?(S,%20%5Cmathcal%7BO%7D)">.</p>
+<p>The <img src="https://latex.codecogs.com/png.latex?S"> axis can be thought of in various ways. When used in a language model, the <img src="https://latex.codecogs.com/png.latex?S"> axis corresponds to position along a text input; in a time series model the <img src="https://latex.codecogs.com/png.latex?S"> axis is the time axis.</p>
+<p>The <img src="https://latex.codecogs.com/png.latex?I"> axis represents the input features or channels. In a language model, each word in some input text gets mapped to an embedding vector of dimension <img src="https://latex.codecogs.com/png.latex?I">, which is nicely explained in <a href="https://www.youtube.com/watch?v=wjZofJX0v4M&amp;t=747s">this 3Blue1Brown video</a>. In a time series model, you might have several different signals that are measured at each point in time, and the positions along the <img src="https://latex.codecogs.com/png.latex?I"> axis represent those different signals.</p>
+<p>An input array <img src="https://latex.codecogs.com/png.latex?X%20%5Cin%20%5Cmathbb%7BR%7D%5E%7B(S,%20I)%7D"> can thus be thought of as a sequence of <img src="https://latex.codecogs.com/png.latex?I">-dimensional vectors <img src="https://latex.codecogs.com/png.latex?(x_p)"> indexed by the sequence axis <img src="https://latex.codecogs.com/png.latex?S">. With this convention, the <img src="https://latex.codecogs.com/png.latex?S">-axis goes along the rows and the <img src="https://latex.codecogs.com/png.latex?I">-dimensional vectors are row vectors.</p>
+<div id="fig-input" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-input-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://awray3.github.io/blog/attention/figures/figure-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-input-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Attention input tensor of shape <img src="https://latex.codecogs.com/png.latex?(S,%20I)">
+</figcaption>
+</figure>
+</div>
+<p>The formula for attention is</p>
+<p><span id="eq-attn"><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0A%5Coperatorname%7BAttention%7D(X)%20&amp;=%0A%20%20%5Coperatorname%7Bsoftmax%7D%5Cbigg(%0A%20%20%20%20%5Cfrac%7B1%7D%7B%5Csqrt%7BD%7D%7D%0A%20%20%20%20QK%5ET%0A%20%20%5Cbigg)%20V%0A%5Cend%7Balign%7D%0A%5Ctag%7B1%7D"></span></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?Q,%20K,%20V"> are called <em>queries</em>, <em>keys</em>, and <em>values</em> respectively. These matrices are defined as</p>
+<p><span id="eq-qkv"><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0A%20%20Q%20&amp;=%20XW_Q%20+%20b_Q%20%5C%5C%0A%20%20K%20&amp;=%20XW_K%20+%20b_K%20%5C%5C%0A%20%20V%20&amp;=%20XW_V%20+%20b_V%0A%5Cend%7Balign%7D%0A%5Ctag%7B2%7D"></span></p>
+<p>The above formulas use matrix multiplication and the sum of the bias vector is broadcasted across the sequence axis. By matrix multiplication we can write this as an equation on the rows of <img src="https://latex.codecogs.com/png.latex?Q">, <img src="https://latex.codecogs.com/png.latex?K">, and <img src="https://latex.codecogs.com/png.latex?V">. For example, for the rows <img src="https://latex.codecogs.com/png.latex?(q_p)"> of <img src="https://latex.codecogs.com/png.latex?Q"> we have</p>
+<p><span id="eq-queries"><img src="https://latex.codecogs.com/png.latex?q_p%20=%20x_p%20W_Q%20+%20b_Q%20%5Ctag%7B3%7D"></span></p>
+<p>(and similarly for rows <img src="https://latex.codecogs.com/png.latex?(k_p)"> of <img src="https://latex.codecogs.com/png.latex?K"> and <img src="https://latex.codecogs.com/png.latex?(v_p)"> of <img src="https://latex.codecogs.com/png.latex?V">). If this equation looks a little strange it’s because it’s an equation on <em>row</em> vectors, whereby matrices act on the right instead of the left. A consequence of this is that the feature rows of <img src="https://latex.codecogs.com/png.latex?Q,%20K,%20V"> are completely localized to their position in the sequence dimension; they do not contain information from other locations along the input sequence.</p>
+<p>The shapes of these arrays are summarized in the following table. Note that <img src="https://latex.codecogs.com/png.latex?Q">, <img src="https://latex.codecogs.com/png.latex?K">, and <img src="https://latex.codecogs.com/png.latex?V"> can be visualized similarly to <img src="https://latex.codecogs.com/png.latex?X"> as in Figure&nbsp;1 as sequences of vectors along the <img src="https://latex.codecogs.com/png.latex?S">-axis.</p>
+<div style="width:30%; margin:0 auto;">
+<div class="table-responsive">
+<table class="table-striped table-hover table-sm small caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Array</th>
+<th style="text-align: center;">Shape</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="https://latex.codecogs.com/png.latex?W_Q"></td>
+<td style="text-align: center;"><img src="https://latex.codecogs.com/png.latex?(I,%20D)"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="https://latex.codecogs.com/png.latex?W_K"></td>
+<td style="text-align: center;"><img src="https://latex.codecogs.com/png.latex?(I,%20D)"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="https://latex.codecogs.com/png.latex?W_V"></td>
+<td style="text-align: center;"><img src="https://latex.codecogs.com/png.latex?(I,%20%5Cmathcal%7BO%7D)"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="https://latex.codecogs.com/png.latex?Q"></td>
+<td style="text-align: center;"><img src="https://latex.codecogs.com/png.latex?(S,%20D)"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><img src="https://latex.codecogs.com/png.latex?K"></td>
+<td style="text-align: center;"><img src="https://latex.codecogs.com/png.latex?(S,%20D)"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="https://latex.codecogs.com/png.latex?V"></td>
+<td style="text-align: center;"><img src="https://latex.codecogs.com/png.latex?(S,%20%5Cmathcal%7BO%7D)"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Each of the weights <img src="https://latex.codecogs.com/png.latex?(W,%20b)"> are free parameters of the layer that are learned during model training.</p>
+<section id="attention-scores" class="level3">
+<h3 class="anchored" data-anchor-id="attention-scores">Attention Scores</h3>
+<p>The next step towards Equation&nbsp;1 is the computation of the <em>attention scores</em>, which are given by the matrix</p>
+<p><span id="eq-attn-matrix"><img src="https://latex.codecogs.com/png.latex?%0AA%20=%20%5Coperatorname%7Bsoftmax%7D%5Cbigg(%0A%20%20%5Cfrac%7B1%7D%7B%5Csqrt%7BD%7D%7D%0A%20%20QK%5ET%0A%5Cbigg)%0A%5Ctag%7B4%7D"></span></p>
+<p>appearing in Equation&nbsp;1. Starting from the inside, the matrix <img src="https://latex.codecogs.com/png.latex?QK%5ET"> is the matrix of dot-products between all query vectors and all key vectors.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AQ%20K%5ET%20=%0A%5Cbegin%7Bpmatrix%7D%0A%5Ctextemdash%20q_1%20%5Ctextemdash%20%5C%5C%0A%5Ctextemdash%20q_2%20%5Ctextemdash%20%5C%5C%0A%5Ctextemdash%20q_3%20%5Ctextemdash%20%5C%5C%0A%5Cvdots%0A%5Cend%7Bpmatrix%7D%0A%5Cbegin%7Bpmatrix%7D%0A%20%20%20%20%20%7C&amp;%20%20%20%20%20%7C%20&amp;%20%20%20%20%20%7C%20&amp;%20%5C%5C%0Ak_1%5ET%20&amp;%20k_2%5ET%20&amp;%20k_3%5ET%20&amp;%20%5Ccdots%20%5C%5C%0A%20%20%20%20%20%7C&amp;%20%20%20%20%20%7C%20&amp;%20%20%20%20%20%7C%20&amp;%20%5C%5C%0A%5Cend%7Bpmatrix%7D%20=%0A%5Cbegin%7Bpmatrix%7D%0Aq_1k_1%5ET%20&amp;%20q_1k_2%5ET%20&amp;%20%5Ccdots%20&amp;%20&amp;%5C%5C%0Aq_2k_1%5ET%20&amp;%20q_2k_2%5ET%20&amp;%20%5Ccdots%20&amp;%20&amp;%20%5C%5C%0A%5Cvdots%20%20%20&amp;%20%5Cvdots%20%20%20&amp;%20%5Cddots%20&amp;%20&amp;%20%5C%5C%0A%20%20%20%20%20%20%20%20%20&amp;%20%20%20%20%20%20%20%20%20%20&amp;%20%20%20%20%20%20%20%20&amp;%20q_ik_j%5ET%20&amp;%20%5C%5C%0A%20%20%20%20%20%20%20%20%20&amp;%20%20%20%20%20%20%20%20%20%20&amp;%20%20%20%20%20%20%20%20&amp;%20%20%20%20%20%20%20%20%20%20&amp;%20%5Cddots%20%5C%5C%0A%5Cend%7Bpmatrix%7D%0A%5Cin%20%5Cmathbb%7BR%7D%5E%7B(S,%20S)%7D%0A"></p>
+<p>A dot product <img src="https://latex.codecogs.com/png.latex?q_ik_j%5ET"> will be small when the query and key columns are very different, and large when the they are nearly parallel. For this reason you can think of the queries as retrieving information by “looking up” the keys using dot products. When the query aligns with the key, that key gets selected, and we might say that position <img src="https://latex.codecogs.com/png.latex?i"> <em>attends to</em> position <img src="https://latex.codecogs.com/png.latex?j">.</p>
+<p>We can start to see that the attention mechanism is like a fuzzy dictionary. A query <img src="https://latex.codecogs.com/png.latex?q_i"> at position <img src="https://latex.codecogs.com/png.latex?i"> in the sequence “looks” at all keys <img src="https://latex.codecogs.com/png.latex?k_j"> along the sequence by taking the dot product with them. When that has high alignment, the associated value <img src="https://latex.codecogs.com/png.latex?v_j"> to <img src="https://latex.codecogs.com/png.latex?k_j"> will then contribute to the final output of the attention layer at position <img src="https://latex.codecogs.com/png.latex?i">.</p>
+<p>To understand the fuzzy part, we must continue digesting Equation&nbsp;4. I’ll come back to the <img src="https://latex.codecogs.com/png.latex?%5Csqrt%7BD%7D"> in a moment, so let’s understand what’s going on with the softmax.</p>
+<p>If we didn’t have the softmax around, attention would output <img src="https://latex.codecogs.com/png.latex?AV=%20QK%5ET%20V">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign*%7D%0AQK%5ET%20V%20&amp;=%20%5Cbegin%7Bpmatrix%7D%0Aq_1k_1%5ET%20&amp;%20q_1k_2%5ET%20&amp;%20%5Ccdots%20&amp;%20&amp;%5C%5C%0Aq_2k_1%5ET%20&amp;%20q_2k_2%5ET%20&amp;%20%5Ccdots%20&amp;%20&amp;%20%5C%5C%0A%5Cvdots%20%20%20&amp;%20%5Cvdots%20%20%20&amp;%20%5Cddots%20&amp;%20&amp;%20%5C%5C%0A%20%20%20%20%20%20%20%20%20&amp;%20%20%20%20%20%20%20%20%20%20&amp;%20%20%20%20%20%20%20%20&amp;%20q_ik_j%5ET%20&amp;%20%5C%5C%0A%20%20%20%20%20%20%20%20%20&amp;%20%20%20%20%20%20%20%20%20%20&amp;%20%20%20%20%20%20%20%20&amp;%20%20%20%20%20%20%20%20%20%20&amp;%20%5Cddots%20%5C%5C%0A%5Cend%7Bpmatrix%7D%0A%5Cbegin%7Bpmatrix%7D%0A%20%20%5Ctextemdash%20v_1%20%5Ctextemdash%20%5C%5C%0A%20%20%5Ctextemdash%20v_2%20%5Ctextemdash%20%5C%5C%0A%20%20%5Cvdots%5C%5C%0A%20%20%5Ctextemdash%20v_j%20%5Ctextemdash%20%5C%5C%0A%20%20%5Cvdots%0A%5Cend%7Bpmatrix%7D%20%5C%5C%0A&amp;=%20%5Cbegin%7Bpmatrix%7D%0A%20%20(q_1k_1%5ET)v_1%20+%20(q_1k_2%5ET)v_2%20+%20%5Ccdots%20+%20(q_1k_S%5ET)v_S%20%5C%5C%0A%20%20(q_2k_1%5ET)v_1%20+%20(q_2k_2%5ET)v_2%20+%20%5Ccdots%20+%20(q_2k_S%5ET)v_S%20%5C%5C%0A%20%20%5Ccdots%5C%5C%0A%20%20(q_ik_1%5ET)v_1%20+%20(q_ik_2%5ET)v_2%20+%20%5Ccdots%20+%20(q_ik_S%5ET)v_S%20%5C%5C%0A%20%20%5Ccdots%0A%5Cend%7Bpmatrix%7D%20%5Coverset%7B%5Ctext%7Bdef%7D%7D%7B=%7D%0A%5Cbegin%7Bpmatrix%7D%0A%20%20%5Ctextemdash%20o_1%20%5Ctextemdash%20%5C%5C%0A%20%20%5Ctextemdash%20o_2%20%5Ctextemdash%20%5C%5C%0A%20%20%5Ccdots%20%5C%5C%0A%20%20%5Ctextemdash%20o_i%20%5Ctextemdash%20%5C%5C%0A%20%20%5Ccdots%0A%5Cend%7Bpmatrix%7D%0A%5Cend%7Balign*%7D%0A"></p>
+<p>The result<sup>1</sup> is a little messy, but it shows what is meant by “fuzzy”: the output vector <img src="https://latex.codecogs.com/png.latex?o_i"> at position <img src="https://latex.codecogs.com/png.latex?i"> in the sequence is a linear combination of the value vectors, and each value <img src="https://latex.codecogs.com/png.latex?v_j"> contributes by an amount proportional to the lookup weights <img src="https://latex.codecogs.com/png.latex?q_ik_j%5ET">.</p>
+<p>Adding the softmax and factor of <img src="https://latex.codecogs.com/png.latex?%5Csqrt%7BD%7D"> back in doesn’t alter this core idea. The <a href="https://en.wikipedia.org/wiki/Softmax_function">softmax</a> in Equation&nbsp;5 is applied over the rows of <img src="https://latex.codecogs.com/png.latex?QK%5ET">, so it converts the set of lookup weights for each output to a probability distribution:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Coperatorname%7Bsoftmax%7D(q_ik_1%5ET/%5Csqrt%7BD%7D,%20q_ik_2%5ET/%5Csqrt%7BD%7D,%20%5Cdots,%20q_ik_S%5ET/%5Csqrt%7BD%7D)%0A%20%20%5Cmapsto%20(a_%7Bi,1%7D,%20a_%7Bi,%202%7D,%20%5Cdots,%20a_%7Bi,%20S%7D)%0A"></p>
+<p>where</p>
+<p><span id="eq-attn-scores"><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0A%20%20a_%7Bi,%20j%7D%20=%20%5Cfrac%7B%5Cexp(q_ik_j%5ET/%5Csqrt%7BD%7D)%7D%7B%5Csum_%7Bl%7D%20%5Cexp(q_ik_l%5ET/%5Csqrt%7BD%7D)%7D.%0A%5Cend%7Balign%7D%0A%5Ctag%7B5%7D"></span></p>
+<p>are the <em>attention scores</em>. The output array’s <img src="https://latex.codecogs.com/png.latex?i%5E%7B%5Ctext%7Bth%7D%7D"> row still looks like a linear combination of value vectors:</p>
+<p><span id="eq-attn-output"><img src="https://latex.codecogs.com/png.latex?%0A%20%20o_i%20=%20a_%7Bi,%201%7Dv_1%20+%20a_%7Bi,%202%7Dv_2%20+%20%5Cdots%20a_%7Bi,%20S%7Dv_S.%0A%5Ctag%7B6%7D"></span></p>
+<p>Now, it’s not the lookup weight <img src="https://latex.codecogs.com/png.latex?q_ik_j%5ET"> but rather a scaled version<sup>2</sup> of its exponential in Equation&nbsp;5 that tells us how much <img src="https://latex.codecogs.com/png.latex?v_j"> contributes to <img src="https://latex.codecogs.com/png.latex?o_i">. We get a maximal contribution when <img src="https://latex.codecogs.com/png.latex?q_i"> is parallel to <img src="https://latex.codecogs.com/png.latex?k_j">, and a minimal contribution when they are anti-parallel.</p>
+<section id="normalizing-factor-sqrtd" class="level4">
+<h4 class="anchored" data-anchor-id="normalizing-factor-sqrtd">Normalizing Factor <img src="https://latex.codecogs.com/png.latex?%5Csqrt%7BD%7D"></h4>
+<p>The normalizing factor of <img src="https://latex.codecogs.com/png.latex?%5Csqrt%7BD%7D"> in these equations is to make sure that the softmax operation doesn’t become oversaturated. Roughly what happens is the lookup weights <img src="https://latex.codecogs.com/png.latex?q_ik_j%5ET"> have a variance equal to <img src="https://latex.codecogs.com/png.latex?D">, so you can expect that several of them are much larger than others. Due to the exponentials in the definition of softmax in Equation&nbsp;5, these much larger values dominate the softmax and most other weights are near <img src="https://latex.codecogs.com/png.latex?0">. Scaling by <img src="https://latex.codecogs.com/png.latex?%5Csqrt%7BD%7D"> brings the variance down to 1, and that ensures that it is unlikely for one particular lookup weight to dominate.</p>
+<p>For more details, see <a href="https://ai.stackexchange.com/a/42197">this great stackexchange answer</a>.</p>
+</section>
+</section>
+</section>
+<section id="multiple-heads" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-heads">Multiple Heads</h2>
+<p>Generalizing to multiple heads is straightforward: if <img src="https://latex.codecogs.com/png.latex?N"> is the number of heads, you chop up the model dimension <img src="https://latex.codecogs.com/png.latex?D"> into <img src="https://latex.codecogs.com/png.latex?N"> bins and apply the attention formula Equation&nbsp;1 <img src="https://latex.codecogs.com/png.latex?N"> times, using <img src="https://latex.codecogs.com/png.latex?D_%7Bhead%7D%20=%20D%20/%20N"> in place of <img src="https://latex.codecogs.com/png.latex?D"> and <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BO%7D_%7Bhead%7D%20=%20%5Cmathcal%7BO%7D%20/%20N"> in place of <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BO%7D">.</p>
+<p>For each <img src="https://latex.codecogs.com/png.latex?n%20=%201,%202,%20%5Cdots,%20N">, the <img src="https://latex.codecogs.com/png.latex?n">th attention head outputs an array of shape <img src="https://latex.codecogs.com/png.latex?(S,%20%5Cmathcal%7BO%7D_%7Bhead%7D)"> whose rows are <img src="https://latex.codecogs.com/png.latex?o_i%5E%7B(n)%7D">. Each of the <img src="https://latex.codecogs.com/png.latex?o_i%5E%7B(n)%7D"> have the same mathematical form as Equation&nbsp;6, except all the row vectors <img src="https://latex.codecogs.com/png.latex?q,%20k,%20v"> of each matrix have reduced length (which means <img src="https://latex.codecogs.com/png.latex?o_i%5E%7B(n)%7D"> also has reduced length because it’s a sum of <img src="https://latex.codecogs.com/png.latex?v">’s). They then fit together to form the final output vector <img src="https://latex.codecogs.com/png.latex?o_i">:</p>
+<p><span id="eq-attn-multi-output"><img src="https://latex.codecogs.com/png.latex?%0Ao_i%20=%20%5Cbegin%7Bpmatrix%7D%0A%20%20o_i%5E%7B(1)%7D%20&amp;%20%5Cbigg%7C%20&amp;%20o_i%5E%7B(2)%7D%20&amp;%20%5Cbigg%7C%20&amp;%20%5Ccdots%20&amp;%20%5Cbigg%7C%20&amp;%20o_%7Bi%7D%5E%7B(N)%7D%0A%5Cend%7Bpmatrix%7D%0A%5Ctag%7B7%7D"></span></p>
+<p>When allowing for more heads, we are deciding that our output features are grouped into sub-outputs, each of which has an attention head behind it. These different groups are then free to learn about different features of the input array <img src="https://latex.codecogs.com/png.latex?X">. This is similar to how a convolutional layer with multiple features can learn to pick out distinct components of the input signal.</p>
+</section>
+<section id="positional-encodings" class="level2">
+<h2 class="anchored" data-anchor-id="positional-encodings">Positional Encodings</h2>
+<p>So at this point we’ve fully defined the attention layer; the output array has rows <img src="https://latex.codecogs.com/png.latex?o_i"> given by Equation&nbsp;6 (or Equation&nbsp;7 when multiple heads are used).</p>
+<p>However, everything that goes into the attention scores <img src="https://latex.codecogs.com/png.latex?a_%7Bi,j%7D"> is purely based on the values <em>at</em> each position, but it does not make use of the relative position of each query and key. Basically, we’re only looking at how values at <img src="https://latex.codecogs.com/png.latex?i"> compare to values at <img src="https://latex.codecogs.com/png.latex?j">, but we haven’t actually included information about how <em>close</em> <img src="https://latex.codecogs.com/png.latex?i"> is to <img src="https://latex.codecogs.com/png.latex?j">.</p>
+<p>To illustrate this a bit a further, consider the following sentence.</p>
+<blockquote class="blockquote">
+<p>They decided to park the car in the park.</p>
+</blockquote>
+<p>By our construction, queries will attend to the word “park” at both occurrences with equal attention, because both “park”s will have the same key and value vectors. The missing context is how far apart the words are; a good model would probably learn to attend differently to the same word at different locations in the sentence.</p>
+<p>One solution is to add positional encoding to the sequence at some point before we calculate attention scores. I’ll briefly mention two methods in this post: fixed vector encodings and rotational encodings. There are many variants of these out there, and these two are relatively common.</p>
+<section id="fixed-vecors" class="level3">
+<h3 class="anchored" data-anchor-id="fixed-vecors">Fixed Vecors</h3>
+<p>The easiest way to add positional encoding is to add on a fixed vector at each point along the sequence. We take vectors <img src="https://latex.codecogs.com/png.latex?%5Cepsilon_1,%20%5Cepsilon_2,%20%5Cdots,%20%5Cepsilon_S%0A%5Cin%20%5Cmathbb%7BR%7D%5EI"> and use <img src="https://latex.codecogs.com/png.latex?x_p%20+%20%5Cepsilon_p"> instead of x_p$ in Equation&nbsp;3, and allow these vectors to be learnable parameters during training. This was the strategy used in the <a href="https://arxiv.org/abs/1706.03762">original paper</a>. The method is pretty simple, but it turns out to not lead to the best results.</p>
+<p>This method also lacks translation invariance. The transformer only knows to distinguish positions based on the raw values of the <img src="https://latex.codecogs.com/png.latex?%5Cepsilon_i">, and if you were to shift your input sequence you might get different results due to the shifted input matching up with different <img src="https://latex.codecogs.com/png.latex?epsilon_i">.</p>
+</section>
+<section id="rotational-encodings" class="level3">
+<h3 class="anchored" data-anchor-id="rotational-encodings">Rotational Encodings</h3>
+<p>A more sophisticated approach appearing the <a href="https://arxiv.org/abs/2104.09864">Roformer</a> paper involves rotating the queries <img src="https://latex.codecogs.com/png.latex?Q"> and keys <img src="https://latex.codecogs.com/png.latex?K"> by rotations <img src="https://latex.codecogs.com/png.latex?R_1,%20R_2,%20...,%20R_S"> such that any neighboring rotations differ by the same angle <img src="https://latex.codecogs.com/png.latex?%5Ctheta">. This breaks the symmetry we observed above, and moreover it is less sensitive to translations, because the <em>relative</em> rotation is preserved along the sequence. This paper has shown this to be a more effective method of positional encoding than the fixed vector approach.</p>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Note that in general, you cannot turn the parentheses around to write <img src="https://latex.codecogs.com/png.latex?o_i%20=%20q_i(k_1%5ETv_1%20+%20%5Ccdots%20+%20k_S%5ETv_S)">, because unless <img src="https://latex.codecogs.com/png.latex?D%20=%0A%5Cmathcal%7BO%7D">, the dot product <img src="https://latex.codecogs.com/png.latex?k_j%5ET%20v_j"> does not make sense.↩︎</p></li>
+<li id="fn2"><p>Note that the denominator of the softmax values <img src="https://latex.codecogs.com/png.latex?a_%7Bi,j%7D"> is the same for all <img src="https://latex.codecogs.com/png.latex?j">.↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>transformers</category>
+  <category>machine-learning</category>
+  <guid>https://awray3.github.io/blog/attention/</guid>
+  <pubDate>Sat, 13 Sep 2025 07:00:00 GMT</pubDate>
+</item>
 <item>
   <title>How to Alter Git Histories</title>
   <link>https://awray3.github.io/blog/til/git-filter-repo/</link>
