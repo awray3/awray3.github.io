@@ -9,9 +9,9 @@ about:
       href: https://linkedin.com/in/andrew-wray3
     - icon: github
       href: https://github.com/awray3
-    - icon: envelope
+    - icon: envelope-fill
       href: mailto:aaawray@proton.me
-    - icon: cup
+    - icon: cup-hot-fill
       href: https://www.buymeacoffee.com/awray
 ---
 

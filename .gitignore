@@ -3,3 +3,5 @@
 /.quarto/
 .ipynb-checkpoints
 .venv
+
+**/*.quarto_ipynb
