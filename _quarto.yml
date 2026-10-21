@@ -1,0 +1,30 @@
+project:
+  type: website
+
+website:
+  title: "Andrew Wray"
+  site-url: https://awray3.github.io
+  favicon: static/img/favicon.ico
+  description: Personal website of Andrew Wray
+  open-graph:
+    site-name: "Andrew Wray"
+  navbar:
+    right:
+      - text: Research
+        href: research.qmd
+      - icon: github
+        href: https://github.com/awray3
+format:
+  html:
+    theme:
+      - slate
+      - static/css/dark.scss
+    monofont: CaskaydiaCove Nerd Font, Monaco
+    toc: true
+    toc-location: right
+    smooth-scroll: true
+    email-obfuscation: javascript
+    fig-cap-location: margin
+    tbl-cap-location: margin
+    title-block-banner: false
+    highlight-style: atom-one-dark
