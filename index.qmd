@@ -10,7 +10,7 @@ about:
     - icon: github
       href: https://github.com/awray3
     - icon: envelope-fill
-      href: mailto:aaawray@proton.me
+      href: mailto:andrew.s.wray@protonmail.com
     - icon: cup-hot-fill
       href: https://www.buymeacoffee.com/awray
 ---
@@ -29,4 +29,4 @@ or reach out on LinkedIn.
 
 [nick_webpage]: https://pages.uoregon.edu/adding/
 [fullpower]: https://www.fullpower.com/
-[contact]: mailto:andrew.wray2718@gmail.com
+[contact]: mailto:andrew.s.wray@protonmail.com
